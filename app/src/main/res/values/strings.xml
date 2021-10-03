@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Elevate</string>
+    <string name="button_sign_in">Sign In</string>
+    <string name="new_user_message">Don\'t have an account? Sign up here.</string>
+</resources>
