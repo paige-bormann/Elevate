@@ -10,12 +10,11 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
     private Button mSignInButton;
-    private final String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Timber.d(TAG, "onCreate() called");
+        Timber.d("onCreate() called");
         setContentView(R.layout.activity_main);
 
         mSignInButton = (Button) findViewById(R.id.sign_in_button);
@@ -32,30 +31,30 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        Timber.d(TAG, "onStart() called");
+        Timber.d("onStart() called");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Timber.d(TAG, "onResume() called");
+        Timber.d("onResume() called");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Timber.d(TAG, "onPause() called");
+        Timber.d("onPause() called");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Timber.d(TAG, "onStop() called");
+        Timber.d("onStop() called");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Timber.d(TAG, "onDestroy() called");
+        Timber.d("onDestroy() called");
     }
 }
