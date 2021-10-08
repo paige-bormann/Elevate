@@ -1,31 +1,26 @@
 package com.example.elevate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
-    private Button mSignInButton;
+/**
+ * Activity for user sign in.
+ *
+ * Created by paige-bormann on 10/08/2021.
+ */
+
+public class SignInActivity extends SingleFragmentActivity {
+    @Override
+    protected Fragment createFragment() {
+        return new SignInFragment();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Timber.d("onCreate() called");
-        setContentView(R.layout.activity_main);
-
-        mSignInButton = (Button) findViewById(R.id.sign_in_button);
-        if (mSignInButton != null) {
-            mSignInButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Does nothing yet
-                }
-            });
-        }
     }
 
     @Override
