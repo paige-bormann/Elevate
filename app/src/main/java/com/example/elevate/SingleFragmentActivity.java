@@ -7,6 +7,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Activity for a single fragment.
+ * Sources: acchampion's TicTacToe SingleFragmentActivity class.
+ *
+ * Created by paige-bormann on 10/08/2021.
+ */
+
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
