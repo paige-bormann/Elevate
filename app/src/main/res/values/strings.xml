@@ -11,4 +11,9 @@
     <string name="password_confirm_hint">Re-enter password</string>
     <string name="welcome_returning_user">Welcome back to Elevate!</string>
     <string name="welcome_new_user">Welcome to Elevate!</string>
+    <string name="button_skills_survey">Skill Level Survey</string>
+    <string name="button_climbing_plan">My Climbing Plan</string>
+    <string name="button_near_me">Climbing Near me</string>
+    <string name="button_progress">My Progress</string>
+    <string name="skill_level">Current Skill Level: </string>
 </resources>

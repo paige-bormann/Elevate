@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/welcome_textview"
+        android:id="@+id/skill_level_textview"
         android:layout_width="292dp"
         android:layout_height="41dp"
         android:layout_marginTop="100dp"
@@ -24,7 +24,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/username"
         app:layout_constraintStart_toStartOf="@+id/username_text"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/skill_level_textview" />
 
     <EditText
         android:id="@+id/username_text"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/password_textview" />
 
     <Button
-        android:id="@+id/create_account_button"
+        android:id="@+id/survey_button"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"

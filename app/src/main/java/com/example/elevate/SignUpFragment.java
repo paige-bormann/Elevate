@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import timber.log.Timber;
 
@@ -34,7 +34,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         mUsernameEditText = v.findViewById(R.id.username_text);
         mPasswordEditText = v.findViewById(R.id.password_text);
         mConfirmPasswordEditText = v.findViewById(R.id.confirm_password_text);
-        mCreateAccountButton = v.findViewById(R.id.create_account_button);
+        mCreateAccountButton = v.findViewById(R.id.survey_button);
         if (mCreateAccountButton != null) {
             mCreateAccountButton.setOnClickListener(this);
         }
@@ -49,6 +49,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         final String confirm = mConfirmPasswordEditText.getText().toString();
 
         // do stuff to create account
+
+        // open home page after account created successfully
+        FragmentManager fm = getParentFragmentManager();
+        Fragment fragment = new HomeFragment();
+        fm.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(fragment.toString())
+                .commit();
     }
 
     @Override

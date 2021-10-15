@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import timber.log.Timber;
 
@@ -31,7 +32,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         mUsernameEditText = v.findViewById(R.id.username_text);
         mPasswordEditText = v.findViewById(R.id.password_text);
-        mLoginButton = v.findViewById(R.id.create_account_button);
+        mLoginButton = v.findViewById(R.id.survey_button);
         if (mLoginButton != null) {
             mLoginButton.setOnClickListener(this);
         }
@@ -45,6 +46,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         final String password = mPasswordEditText.getText().toString();
 
         // do stuff to check login
+
+        // open home page once logged in successful
+        FragmentManager fm = getParentFragmentManager();
+        Fragment fragment = new HomeFragment();
+        fm.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(fragment.toString())
+                .commit();
     }
 
     @Override
