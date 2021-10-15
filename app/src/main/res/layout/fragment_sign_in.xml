@@ -9,19 +9,20 @@
         android:id="@+id/sign_in_button"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="525dp"
         android:text="@string/button_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/new_user_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="@string/new_user_message"
+        android:text="@string/button_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_in_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
