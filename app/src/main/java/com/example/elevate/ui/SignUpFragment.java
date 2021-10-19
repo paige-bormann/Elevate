@@ -1,4 +1,4 @@
-package com.example.elevate;
+package com.example.elevate.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,12 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.elevate.R;
+
 import timber.log.Timber;
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class SignUpFragment extends Fragment implements View.OnClickListener {
     private EditText mUsernameEditText;
     private EditText mPasswordEditText;
-    private Button mLoginButton;
+    private EditText mConfirmPasswordEditText;
+    private Button mCreateAccountButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,26 +31,28 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView() called");
 
-        View v = inflater.inflate(R.layout.fragment_login, container, false);
+        View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         mUsernameEditText = v.findViewById(R.id.username_text);
         mPasswordEditText = v.findViewById(R.id.password_text);
-        mLoginButton = v.findViewById(R.id.survey_button);
-        if (mLoginButton != null) {
-            mLoginButton.setOnClickListener(this);
+        mConfirmPasswordEditText = v.findViewById(R.id.confirm_password_text);
+        mCreateAccountButton = v.findViewById(R.id.survey_button);
+        if (mCreateAccountButton != null) {
+            mCreateAccountButton.setOnClickListener(this);
         }
-
 
         return v;
     }
 
-    private void checkLogin() {
+    private void createAccount() {
+        // FragmentActivity activity = requireActivity();
         final String username = mUsernameEditText.getText().toString();
         final String password = mPasswordEditText.getText().toString();
+        final String confirm = mConfirmPasswordEditText.getText().toString();
 
-        // do stuff to check login
+        // do stuff to create account
 
-        // open home page once logged in successful
+        // open home page after account created successfully
         FragmentManager fm = getParentFragmentManager();
         Fragment fragment = new HomeFragment();
         fm.beginTransaction()
@@ -58,6 +63,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        checkLogin();
+        createAccount();
     }
 }

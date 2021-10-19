@@ -1,4 +1,4 @@
-package com.example.elevate;
+package com.example.elevate.ui;
 
 import android.os.Bundle;
 
@@ -6,6 +6,8 @@ import androidx.annotation.LayoutRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.elevate.R;
 
 /**
  * Activity for a single fragment.

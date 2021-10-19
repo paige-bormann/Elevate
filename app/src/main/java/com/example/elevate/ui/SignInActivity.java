@@ -1,4 +1,4 @@
-package com.example.elevate;
+package com.example.elevate.ui;
 
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;

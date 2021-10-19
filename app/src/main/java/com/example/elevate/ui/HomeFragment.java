@@ -1,4 +1,4 @@
-package com.example.elevate;
+package com.example.elevate.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.example.elevate.R;
 
 import timber.log.Timber;
 
