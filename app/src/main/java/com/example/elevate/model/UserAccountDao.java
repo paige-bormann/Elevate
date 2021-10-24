@@ -16,23 +16,22 @@ public interface UserAccountDao {
     // allowing the insert of the same word multiple times by passing a
     // conflict resolution strategy
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(UserAccount userAccount);
+    public void insert(UserAccount userAccount);
 
     @Update
-    void update(UserAccount userAccount);
+    public void update(UserAccount userAccount);
 
     @Delete
-    void delete(UserAccount userAccount);
-
-    //TODO add R of "CRUD"
+    public void delete(UserAccount userAccount);
 
     @Query("DELETE FROM useraccount") //useraccount is table name, delete all rows I think
-    void deleteAll();
+    public void deleteAll();
 
     @Query("SELECT * FROM useraccount ORDER BY rowid ASC")
         //wrap in liveData?
     LiveData<List<UserAccount>> getAllNames();
 
-
+    @Query("SELECT * FROM useraccount WHERE name LIKE :name AND password LIKE :password LIMIT 1")
+    public LiveData<UserAccount> findByName(String name, String password);
 }
 

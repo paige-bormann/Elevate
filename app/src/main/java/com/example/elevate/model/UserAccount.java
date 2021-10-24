@@ -37,6 +37,8 @@ public class UserAccount {
     public UserAccount(@NonNull String name, @NonNull String password) {
         mName = name;
         mPassword = password;
+        mGLevel = 0;
+        mCLevel = 0;
     }
 
     //setters (must have a setter for any variable that is not in the constructor)

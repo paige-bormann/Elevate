@@ -22,6 +22,11 @@ public class ElevateRepository {
         mAllWorkouts= mWorkoutDao.getAllWorkouts();
     }
 
+    LiveData<UserAccount> findUserAccountByName(UserAccount userAccount) {
+        LiveData<UserAccount> theUserAccount = mUserAccountDao.findByName(userAccount.getName(), userAccount.getPassword());
+        return theUserAccount;
+    }
+
     //UserAccount database methods
     public void insert(UserAccount userAccount){
         ElevateRoomDatabase.databaseWriteExecutor.execute(() ->{

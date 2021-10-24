@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ElevateViewModel  extends AndroidViewModel {
 
@@ -14,6 +15,7 @@ public class ElevateViewModel  extends AndroidViewModel {
 
     private final LiveData<List<UserAccount>> mAllNames;
     private final LiveData<List<Workout>> mAllWorkouts;
+    private UserAccount mCurrentUser;
 
     //constructor
     public ElevateViewModel(@NonNull Application application) {
@@ -21,6 +23,25 @@ public class ElevateViewModel  extends AndroidViewModel {
         mRepository=new ElevateRepository(application);
         mAllNames=mRepository.getAllNames();
         mAllWorkouts=mRepository.getAllWorkouts();
+        mCurrentUser = null;
+    }
+
+    public boolean containsUserAccount(UserAccount userAccount) {
+        boolean accountInList = false;
+
+        LiveData<List<UserAccount>> userAccountListData = this.getAllNames();
+        List<UserAccount> userAccountList = userAccountListData.getValue();
+
+        if (Objects.requireNonNull(userAccountList).contains(userAccount)) {
+            accountInList = true;
+            mCurrentUser = userAccount;
+        }
+
+        return accountInList;
+    }
+
+    public UserAccount getCurrentUser() {
+        return mCurrentUser;
     }
 
     //User account db methods
@@ -32,6 +53,10 @@ public class ElevateViewModel  extends AndroidViewModel {
         mRepository.delete(userAccount);
     }
 
+    public void deleteCurrentUser() {
+        mRepository.delete(mCurrentUser);
+    }
+
     public void update(UserAccount userAccount){
         mRepository.update(userAccount);
     }
@@ -40,7 +65,7 @@ public class ElevateViewModel  extends AndroidViewModel {
         mRepository.deleteAll();
     }
 
-    LiveData<List<UserAccount>> getAllNames(){
+    public LiveData<List<UserAccount>> getAllNames(){
         return mAllNames;
     }
 
