@@ -1,6 +1,7 @@
 package com.example.elevate.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -97,7 +99,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         final int viewId = v.getId();
         if (viewId == R.id.survey_button) {
-            // open survey page
+            FragmentManager fm = getParentFragmentManager();
+            Fragment fragment = new QuestionOneFragment();
+            fm.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(fragment.toString())
+                    .commit();
         } else if (viewId == R.id.climbing_plan_button) {
             // open climbing plan page
         } else if (viewId == R.id.near_me_button) {

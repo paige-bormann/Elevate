@@ -18,6 +18,8 @@ import com.example.elevate.R;
 import com.example.elevate.model.ElevateViewModel;
 import com.example.elevate.model.UserAccount;
 
+import java.security.NoSuchAlgorithmException;
+
 import timber.log.Timber;
 
 /**
@@ -39,11 +41,17 @@ public class DeleteAccountDialogFragment extends DialogFragment {
         builder.setMessage(R.string.delete_account_confirm)
                 .setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        FragmentActivity activity = requireActivity();
-                        mElevateViewModel.deleteCurrentUser();
-                        Toast.makeText(activity.getApplicationContext(), "UserAccount deleted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(activity, SignInActivity.class));
-                        activity.finish();
+                        try {
+                            Activity activity = requireActivity();
+                            UserAccount user = mElevateViewModel.getCurrentUser();
+                            mElevateViewModel.delete(user);
+                            Toast.makeText(activity.getApplicationContext(), "UserAccount deleted", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(activity, SignInActivity.class));
+                            activity.finish();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

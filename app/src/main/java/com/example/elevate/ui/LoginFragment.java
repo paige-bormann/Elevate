@@ -92,10 +92,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             UserAccount userAccount = new UserAccount(username, sha256HashStr);
             boolean validUser = mElevateViewModel.containsUserAccount(userAccount);
-            // LiveData<List<UserAccount>> userAccountListData = mElevateViewModel.getAllNames();
-            //List<UserAccount> userAccountList = userAccountListData.getValue();
-
-            //if (Objects.requireNonNull(userAccountList).contains(userAccount)) {
             if (validUser) {
                 // Open home page once logged in successfully
                 FragmentManager fm = getParentFragmentManager();

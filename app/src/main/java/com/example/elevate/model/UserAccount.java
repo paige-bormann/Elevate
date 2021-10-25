@@ -85,7 +85,7 @@ public class UserAccount {
 
     @Override
     public int hashCode() {
-        return Objects.hash(mUid, mName, mPassword);
+        return Objects.hash(mUid, mName, mPassword, mCLevel, mGLevel);
     }
 
     @NonNull
@@ -95,6 +95,8 @@ public class UserAccount {
                 "uid=" + mUid +
                 "; name='" + mName + '\'' +
                 "; password='" + mPassword + '\'' +
+                "; currentLevel='" + mCLevel + '\'' +
+                "; goalLevel='" + mGLevel + '\'' +
                 '}';
     }
 }

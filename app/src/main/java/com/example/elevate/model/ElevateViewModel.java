@@ -12,7 +12,6 @@ import java.util.Objects;
 public class ElevateViewModel  extends AndroidViewModel {
 
     private ElevateRepository mRepository;
-
     private final LiveData<List<UserAccount>> mAllNames;
     private final LiveData<List<Workout>> mAllWorkouts;
     private UserAccount mCurrentUser;
@@ -51,10 +50,6 @@ public class ElevateViewModel  extends AndroidViewModel {
 
     public void delete(UserAccount userAccount){
         mRepository.delete(userAccount);
-    }
-
-    public void deleteCurrentUser() {
-        mRepository.delete(mCurrentUser);
     }
 
     public void update(UserAccount userAccount){
