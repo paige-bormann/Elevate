@@ -101,8 +101,13 @@ public class UpdateWorkoutFragment extends Fragment implements View.OnClickListe
         final String tutorial = mTutorialEditText.getText().toString();
 
         FragmentActivity activity = requireActivity();
-        Workout workout = new Workout(name, style, grade, tutorial);
-        mElevateViewModel.update(workout);
-        Toast.makeText(activity.getApplicationContext(), "Workout updated", Toast.LENGTH_SHORT).show();
+        if (allWorkouts != null && allWorkouts.size() >=  1) {
+            allWorkouts.get(0).setName(name);
+            allWorkouts.get(0).setStyle(style);
+            allWorkouts.get(0).setGrade(grade);
+            allWorkouts.get(0).setTutorial(tutorial);
+            mElevateViewModel.update(allWorkouts.get(0));
+            Toast.makeText(activity.getApplicationContext(), "Workout updated", Toast.LENGTH_SHORT).show();
+        }
     }
 }

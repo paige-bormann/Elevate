@@ -33,6 +33,13 @@ public class Workout {
     public void setWorkoutId(int mWorkoutId) { //setter for id since it is not in constructor
         this.mWorkoutId = mWorkoutId;
     }
+    public void setName(String name) { this.name = name; }
+
+    public void setStyle(String style) { this.style = style; }
+
+    public void setGrade(int grade) { this.grade = grade; }
+
+    public void setTutorial(String tutorial) { this.tutorial = tutorial; }
 
     //getters
     public int getWorkoutId() {
