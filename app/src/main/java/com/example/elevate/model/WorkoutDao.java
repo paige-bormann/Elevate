@@ -13,21 +13,21 @@ import java.util.List;
 public interface WorkoutDao { //create methods and annotate, room will automatically generate code for us
 
     @Insert
-    void insert(Workout workout);
+    public void insert(Workout workout);
 
     @Update
-    void update(Workout workout);
+    public void update(Workout workout);
 
     @Delete
-    void delete(Workout workout);
+    public void delete(Workout workout);
 
     //TODO add R of "CRUD"
 
     @Query("DELETE FROM workout_table") //delete all workouts
-    void deleteAllWorkouts();
+    public void deleteAllWorkouts();
 
     // * means all columns
     @Query("SELECT * FROM workout_table ORDER BY rowid DESC") //get all of the workouts?
-    LiveData<List<Workout>> getAllWorkouts(); //liveData wrapper
+    public LiveData<List<Workout>> getAllWorkouts(); //liveData wrapper
 
 }

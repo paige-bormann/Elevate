@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -35,6 +37,22 @@ public class QuestionOneFragment extends Fragment implements View.OnClickListene
         Timber.d("onCreate() called");
         Activity activity = requireActivity();
         mElevateViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(ElevateViewModel.class);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            AppCompatActivity activity = (AppCompatActivity) requireActivity();
+
+            ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setSubtitle(getResources().getString(R.string.skill_survey));
+            }
+        }
+        catch (NullPointerException npe) {
+            Timber.e("Could not set subtitle");
+        }
     }
 
     @Override

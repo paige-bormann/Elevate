@@ -19,9 +19,9 @@ public class ElevateViewModel  extends AndroidViewModel {
     //constructor
     public ElevateViewModel(@NonNull Application application) {
         super(application);
-        mRepository=new ElevateRepository(application);
-        mAllNames=mRepository.getAllNames();
-        mAllWorkouts=mRepository.getAllWorkouts();
+        mRepository = new ElevateRepository(application);
+        mAllNames = mRepository.getAllNames();
+        mAllWorkouts = mRepository.getAllWorkouts();
         mCurrentUser = null;
     }
 
@@ -82,7 +82,7 @@ public class ElevateViewModel  extends AndroidViewModel {
         mRepository.deleteAllWorkouts();
     }
 
-    LiveData<List<Workout>> getAllWorkouts(){
+    public LiveData<List<Workout>> getAllWorkouts(){
         return mAllWorkouts;
     }
 

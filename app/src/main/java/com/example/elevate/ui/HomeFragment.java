@@ -106,7 +106,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     .addToBackStack(fragment.toString())
                     .commit();
         } else if (viewId == R.id.climbing_plan_button) {
-            // open climbing plan page
+            FragmentManager fm = getParentFragmentManager();
+            Fragment fragment = new ClimbingPlanFragment();
+            fm.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(fragment.toString())
+                    .commit();
         } else if (viewId == R.id.near_me_button) {
             // open near me page
         } else if (viewId == R.id.progress_button) {

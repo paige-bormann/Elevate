@@ -29,7 +29,7 @@ public interface UserAccountDao {
 
     @Query("SELECT * FROM useraccount ORDER BY rowid ASC")
         //wrap in liveData?
-    LiveData<List<UserAccount>> getAllNames();
+    public LiveData<List<UserAccount>> getAllNames();
 
     @Query("SELECT * FROM useraccount WHERE name LIKE :name AND password LIKE :password LIMIT 1")
     public LiveData<UserAccount> findByName(String name, String password);
