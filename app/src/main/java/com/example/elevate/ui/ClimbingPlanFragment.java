@@ -32,10 +32,10 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
     private Button mNewWorkoutButton;
     private Button mUpdateWorkoutButton;
     private Button mDeleteWorkoutButton;
-    private TextView mNameTextView;
-    private TextView mStyleTextView;
-    private TextView mGradeTextView;
-    private TextView mTutorialTextView;
+    private TextView mNameEditText;
+    private TextView mStyleEditText;
+    private TextView mGradeEditText;
+    private TextView mTutorialEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,15 +70,15 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
         LiveData<List<Workout>> workoutListData = mElevateViewModel.getAllWorkouts();
         List<Workout> workoutList = workoutListData.getValue();
 
-        mNameTextView = v.findViewById(R.id.name_textview);
-        mStyleTextView = v.findViewById(R.id.style_textview);
-        mGradeTextView = v.findViewById(R.id.grade_textview);
-        mTutorialTextView = v.findViewById(R.id.tutorial_textview);
+        mNameEditText = v.findViewById(R.id.name_edittext);
+        mStyleEditText = v.findViewById(R.id.style_edittext);
+        mGradeEditText = v.findViewById(R.id.grade_edittext);
+        mTutorialEditText = v.findViewById(R.id.tutorial_edittext);
         if (workoutList != null && workoutList.size() >=  1) {
-            mNameTextView.setText(workoutList.get(0).getName());
-            mStyleTextView.setText(workoutList.get(0).getStyle());
-            mGradeTextView.setText(String.valueOf(workoutList.get(0).getGrade()));
-            mTutorialTextView.setText(workoutList.get(0).getTutorial());
+            mNameEditText.setText(workoutList.get(0).getName());
+            mStyleEditText.setText(workoutList.get(0).getStyle());
+            mGradeEditText.setText(String.valueOf(workoutList.get(0).getGrade()));
+            mTutorialEditText.setText(workoutList.get(0).getTutorial());
         }
 
         mNewWorkoutButton = v.findViewById(R.id.new_workout_button);

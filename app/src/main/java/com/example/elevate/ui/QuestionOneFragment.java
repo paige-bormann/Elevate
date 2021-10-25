@@ -81,24 +81,21 @@ public class QuestionOneFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         UserAccount user = mElevateViewModel.getCurrentUser();
-        switch(checkedId) {
-            case R.id.beginner_radiobutton:
-                user.setCLevel(1);
-                mElevateViewModel.update(user);
-            case R.id.intermediate_radiobutton:
-                user.setCLevel(2);
-                mElevateViewModel.update(user);
-            case R.id.advanced_radiobutton:
-                user.setCLevel(3);
-                mElevateViewModel.update(user);
-            case R.id.elite_radiobutton:
-                user.setCLevel(4);
-                mElevateViewModel.update(user);
-            case R.id.professional_radiobutton:
-                user.setCLevel(5);
-                mElevateViewModel.update(user);
+        if (checkedId == R.id.beginner_radiobutton) {
+            user.setCLevel(1);
+            mElevateViewModel.update(user);
+        } else if (checkedId == R.id.intermediate_radiobutton) {
+            user.setCLevel(2);
+            mElevateViewModel.update(user);
+        } else if (checkedId == R.id.advanced_radiobutton) {
+            user.setCLevel(3);
+            mElevateViewModel.update(user);
+        } else if (checkedId == R.id.elite_radiobutton) {
+            user.setCLevel(4);
+            mElevateViewModel.update(user);
+        } else if (checkedId == R.id.professional_radiobutton) {
+            user.setCLevel(5);
+            mElevateViewModel.update(user);
         }
-
-
     }
 }

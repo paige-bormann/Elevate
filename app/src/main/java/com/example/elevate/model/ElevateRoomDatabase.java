@@ -27,6 +27,8 @@ public abstract class ElevateRoomDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ElevateRoomDatabase.class, "elevate_database")
+                            .fallbackToDestructiveMigration()
+                            .fallbackToDestructiveMigrationFrom(1)
                             .build();
                 }
             }

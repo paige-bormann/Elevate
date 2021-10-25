@@ -10,10 +10,8 @@ import androidx.room.PrimaryKey;
 @Fts4
 @Entity(tableName = "workout_table")
 public class Workout {
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "rowid")
-    @Ignore //TODO fix this
     private int mWorkoutId;
 
     private String name;

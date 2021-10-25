@@ -27,11 +27,11 @@ public interface UserAccountDao {
     @Query("DELETE FROM useraccount") //useraccount is table name, delete all rows I think
     public void deleteAll();
 
-    @Query("SELECT * FROM useraccount ORDER BY rowid ASC")
+    @Query("SELECT rowid, name, password, currentLevel, goalLevel FROM useraccount ORDER BY rowid ASC")
         //wrap in liveData?
     public LiveData<List<UserAccount>> getAllNames();
 
-    @Query("SELECT * FROM useraccount WHERE name LIKE :name AND password LIKE :password LIMIT 1")
+    @Query("SELECT rowid, name, password, currentLevel, goalLevel FROM useraccount WHERE name LIKE :name AND password LIKE :password LIMIT 1")
     public LiveData<UserAccount> findByName(String name, String password);
 }
 

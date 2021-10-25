@@ -14,7 +14,6 @@ import java.util.Objects;
 public class UserAccount {
     @PrimaryKey(autoGenerate = true) //room will autogenerate these numbers
     @ColumnInfo(name = "rowid")
-    @Ignore //TODO fix
     public int mUid;
 
     @NonNull
@@ -42,10 +41,6 @@ public class UserAccount {
     }
 
     //setters (must have a setter for any variable that is not in the constructor)
-    public void setUid(int mUid) {
-        this.mUid = mUid;
-    }
-
     public void setCLevel(int mCLevel) {
         this.mCLevel = mCLevel;
     }
@@ -55,9 +50,7 @@ public class UserAccount {
     }
 
     //getters
-    public int getUid() {
-        return mUid;
-    }
+    public int getUid() { return this.mUid; }
 
     public String getName() {
         return mName;
