@@ -46,13 +46,6 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
         Timber.d("onCreate() called");
         Activity activity = requireActivity();
         mElevateViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(ElevateViewModel.class);
-
-        mElevateViewModel.getAllWorkouts().observe((LifecycleOwner) activity, new Observer<List<Workout>>() {
-            @Override
-            public void onChanged(List<Workout> workouts) {
-                allWorkouts = workouts;
-            }
-        });
     }
 
     @Override
@@ -82,18 +75,6 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
         mGradeTextView = v.findViewById(R.id.grade_display_textview);
         mTutorialTextView = v.findViewById(R.id.tutorial_display_textview);
 
-        if (allWorkouts != null && allWorkouts.size() >=  1) {
-            mNameTextView.setText(allWorkouts.get(0).getName());
-            mStyleTextView.setText(allWorkouts.get(0).getStyle());
-            mGradeTextView.setText(String.valueOf(allWorkouts.get(0).getGrade()));
-            mTutorialTextView.setText(allWorkouts.get(0).getTutorial());
-        } else {
-            mNameTextView.setText("Name");
-            mStyleTextView.setText("Style");
-            mGradeTextView.setText("Grade");
-            mTutorialTextView.setText("Tutorial");
-        }
-
         mNewWorkoutButton = v.findViewById(R.id.new_workout_button);
         if (mNewWorkoutButton != null) {
             mNewWorkoutButton.setOnClickListener(this);
@@ -106,6 +87,25 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
         if (mDeleteWorkoutButton != null) {
             mDeleteWorkoutButton.setOnClickListener(this);
         }
+
+        Activity activity = requireActivity();
+        mElevateViewModel.getAllWorkouts().observe((LifecycleOwner) activity, new Observer<List<Workout>>() {
+            @Override
+            public void onChanged(List<Workout> workouts) {
+                allWorkouts = workouts;
+                if (allWorkouts != null && allWorkouts.size() >=  1) {
+                    mNameTextView.setText(allWorkouts.get(0).getName());
+                    mStyleTextView.setText(allWorkouts.get(0).getStyle());
+                    mGradeTextView.setText(String.valueOf(allWorkouts.get(0).getGrade()));
+                    mTutorialTextView.setText(allWorkouts.get(0).getTutorial());
+                } else {
+                    mNameTextView.setText("Name");
+                    mStyleTextView.setText("Style");
+                    mGradeTextView.setText("Grade");
+                    mTutorialTextView.setText("Tutorial");
+                }
+            }
+        });
 
         return v;
     }
@@ -130,17 +130,6 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
         } else if (viewId == R.id.delete_workout_button) {
             if (allWorkouts != null && allWorkouts.size() >=  1) {
                 mElevateViewModel.delete(allWorkouts.get(0));
-            }
-            if (allWorkouts != null && allWorkouts.size() >=  1) {
-                mNameTextView.setText(allWorkouts.get(0).getName());
-                mStyleTextView.setText(allWorkouts.get(0).getStyle());
-                mGradeTextView.setText(String.valueOf(allWorkouts.get(0).getGrade()));
-                mTutorialTextView.setText(allWorkouts.get(0).getTutorial());
-            } else {
-                mNameTextView.setText("Name");
-                mStyleTextView.setText("Style");
-                mGradeTextView.setText("Grade");
-                mTutorialTextView.setText("Tutorial");
             }
         }
     }
