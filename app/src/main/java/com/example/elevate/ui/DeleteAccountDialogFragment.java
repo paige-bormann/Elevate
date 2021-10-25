@@ -8,9 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -18,7 +19,7 @@ import com.example.elevate.R;
 import com.example.elevate.model.ElevateViewModel;
 import com.example.elevate.model.UserAccount;
 
-import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -43,8 +44,10 @@ public class DeleteAccountDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         try {
                             Activity activity = requireActivity();
-                            UserAccount user = mElevateViewModel.getCurrentUser();
-                            mElevateViewModel.delete(user);
+                            UserAccount currentUser = mElevateViewModel.getCurrentUser();
+                            mElevateViewModel.delete(currentUser);
+                            //LiveData<UserAccount> userAccountLiveData = mElevateViewModel.getUserAccount(user);
+                            //mElevateViewModel.delete(userAccountLiveData.getValue());
                             Toast.makeText(activity.getApplicationContext(), "UserAccount deleted", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(activity, SignInActivity.class));
                             activity.finish();

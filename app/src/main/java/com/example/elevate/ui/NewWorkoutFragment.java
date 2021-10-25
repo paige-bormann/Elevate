@@ -65,9 +65,6 @@ public class NewWorkoutFragment extends Fragment implements View.OnClickListener
 
         View v = inflater.inflate(R.layout.fragment_new_workout, container, false);
 
-        LiveData<List<Workout>> workoutListData = mElevateViewModel.getAllWorkouts();
-        List<Workout> workoutList = workoutListData.getValue();
-
         mNameEditText = v.findViewById(R.id.name_edittext);
         mStyleEditText = v.findViewById(R.id.style_edittext);
         mGradeEditText = v.findViewById(R.id.grade_edittext);

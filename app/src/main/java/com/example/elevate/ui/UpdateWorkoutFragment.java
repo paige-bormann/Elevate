@@ -14,7 +14,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -33,6 +36,7 @@ public class UpdateWorkoutFragment extends Fragment implements View.OnClickListe
     private EditText mStyleEditText;
     private EditText mGradeEditText;
     private EditText mTutorialEditText;
+    private List<Workout> allWorkouts;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,12 @@ public class UpdateWorkoutFragment extends Fragment implements View.OnClickListe
         Timber.d("onCreate() called");
         Activity activity = requireActivity();
         mElevateViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(ElevateViewModel.class);
+        mElevateViewModel.getAllWorkouts().observe((LifecycleOwner) activity, new Observer<List<Workout>>() {
+            @Override
+            public void onChanged(List<Workout> workouts) {
+                allWorkouts = workouts;
+            }
+        });
     }
 
     @Override
@@ -64,18 +74,15 @@ public class UpdateWorkoutFragment extends Fragment implements View.OnClickListe
 
         View v = inflater.inflate(R.layout.fragment_update_workout, container, false);
 
-        LiveData<List<Workout>> workoutListData = mElevateViewModel.getAllWorkouts();
-        List<Workout> workoutList = workoutListData.getValue();
-
         mNameEditText = v.findViewById(R.id.name_update_edittext);
         mStyleEditText = v.findViewById(R.id.style_update_edittext);
         mGradeEditText = v.findViewById(R.id.grade_update_edittext);
         mTutorialEditText = v.findViewById(R.id.tutorial_update_edittext);
-        if (workoutList != null && workoutList.size() >=  1) {
-            mNameEditText.setText(workoutList.get(0).getName());
-            mStyleEditText.setText(workoutList.get(0).getStyle());
-            mGradeEditText.setText(String.valueOf(workoutList.get(0).getGrade()));
-            mTutorialEditText.setText(workoutList.get(0).getTutorial());
+        if (allWorkouts != null && allWorkouts.size() >=  1) {
+            mNameEditText.setText(allWorkouts.get(0).getName());
+            mStyleEditText.setText(allWorkouts.get(0).getStyle());
+            mGradeEditText.setText(String.valueOf(allWorkouts.get(0).getGrade()));
+            mTutorialEditText.setText(allWorkouts.get(0).getTutorial());
         }
 
         mSaveWorkoutButton = v.findViewById(R.id.save_workout_button);

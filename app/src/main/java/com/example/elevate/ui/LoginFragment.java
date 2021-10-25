@@ -39,6 +39,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText mPasswordEditText;
     private Button mLoginButton;
     private ElevateViewModel mElevateViewModel;
+    private List<UserAccount> mNames;
 
     private final static String OPT_NAME = "name";
     private final static String OPT_PASS = "password";

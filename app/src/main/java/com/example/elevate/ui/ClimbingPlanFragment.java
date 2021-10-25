@@ -14,7 +14,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -32,10 +34,11 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
     private Button mNewWorkoutButton;
     private Button mUpdateWorkoutButton;
     private Button mDeleteWorkoutButton;
-    private TextView mNameEditText;
-    private TextView mStyleEditText;
-    private TextView mGradeEditText;
-    private TextView mTutorialEditText;
+    private TextView mNameTextView;
+    private TextView mStyleTextView;
+    private TextView mGradeTextView;
+    private TextView mTutorialTextView;
+    private List<Workout> allWorkouts;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,13 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
         Timber.d("onCreate() called");
         Activity activity = requireActivity();
         mElevateViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(ElevateViewModel.class);
+
+        mElevateViewModel.getAllWorkouts().observe((LifecycleOwner) activity, new Observer<List<Workout>>() {
+            @Override
+            public void onChanged(List<Workout> workouts) {
+                allWorkouts = workouts;
+            }
+        });
     }
 
     @Override
@@ -67,18 +77,21 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
 
         View v = inflater.inflate(R.layout.fragment_workouts, container, false);
 
-        LiveData<List<Workout>> workoutListData = mElevateViewModel.getAllWorkouts();
-        List<Workout> workoutList = workoutListData.getValue();
+        mNameTextView = v.findViewById(R.id.name_display_textview);
+        mStyleTextView = v.findViewById(R.id.style_display_textview);
+        mGradeTextView = v.findViewById(R.id.grade_display_textview);
+        mTutorialTextView = v.findViewById(R.id.tutorial_display_textview);
 
-        mNameEditText = v.findViewById(R.id.name_edittext);
-        mStyleEditText = v.findViewById(R.id.style_edittext);
-        mGradeEditText = v.findViewById(R.id.grade_edittext);
-        mTutorialEditText = v.findViewById(R.id.tutorial_edittext);
-        if (workoutList != null && workoutList.size() >=  1) {
-            mNameEditText.setText(workoutList.get(0).getName());
-            mStyleEditText.setText(workoutList.get(0).getStyle());
-            mGradeEditText.setText(String.valueOf(workoutList.get(0).getGrade()));
-            mTutorialEditText.setText(workoutList.get(0).getTutorial());
+        if (allWorkouts != null && allWorkouts.size() >=  1) {
+            mNameTextView.setText(allWorkouts.get(0).getName());
+            mStyleTextView.setText(allWorkouts.get(0).getStyle());
+            mGradeTextView.setText(String.valueOf(allWorkouts.get(0).getGrade()));
+            mTutorialTextView.setText(allWorkouts.get(0).getTutorial());
+        } else {
+            mNameTextView.setText("Name");
+            mStyleTextView.setText("Style");
+            mGradeTextView.setText("Grade");
+            mTutorialTextView.setText("Tutorial");
         }
 
         mNewWorkoutButton = v.findViewById(R.id.new_workout_button);
@@ -115,10 +128,19 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
                     .addToBackStack(fragment.toString())
                     .commit();
         } else if (viewId == R.id.delete_workout_button) {
-            LiveData<List<Workout>> workoutListData = mElevateViewModel.getAllWorkouts();
-            List<Workout> workoutList = workoutListData.getValue();
-            if (workoutList != null && workoutList.size() >=  1) {
-                mElevateViewModel.delete(workoutList.get(0));
+            if (allWorkouts != null && allWorkouts.size() >=  1) {
+                mElevateViewModel.delete(allWorkouts.get(0));
+            }
+            if (allWorkouts != null && allWorkouts.size() >=  1) {
+                mNameTextView.setText(allWorkouts.get(0).getName());
+                mStyleTextView.setText(allWorkouts.get(0).getStyle());
+                mGradeTextView.setText(String.valueOf(allWorkouts.get(0).getGrade()));
+                mTutorialTextView.setText(allWorkouts.get(0).getTutorial());
+            } else {
+                mNameTextView.setText("Name");
+                mStyleTextView.setText("Style");
+                mGradeTextView.setText("Grade");
+                mTutorialTextView.setText("Tutorial");
             }
         }
     }
