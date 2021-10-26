@@ -25,19 +25,6 @@ public class ElevateViewModel  extends AndroidViewModel {
         mCurrentUser = null;
     }
 
-/*    public boolean containsUserAccount(UserAccount userAccount) {
-        boolean accountInList = false;
-        LiveData<List<UserAccount>> userAccountListData = this.getAllNames();
-        List<UserAccount> userAccountList = userAccountListData.getValue();
-
-        if (Objects.requireNonNull(userAccountList).contains(userAccount)) {
-            accountInList = true;
-            mCurrentUser = userAccount;
-        }
-
-        return accountInList;
-    }*/
-
     public boolean containsUserAccount(UserAccount userAccount) {
         boolean accountInList = false;
 
@@ -55,10 +42,6 @@ public class ElevateViewModel  extends AndroidViewModel {
 
     public UserAccount getCurrentUser() {
         return mCurrentUser;
-    }
-
-    public UserAccount getUserAccount(UserAccount userAccount) {
-        return mRepository.findUserAccountByName(userAccount);
     }
 
     //User account db methods

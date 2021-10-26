@@ -88,7 +88,4 @@ public class ElevateRepository {
     LiveData<List<Workout>> getAllWorkouts(){
         return mAllWorkouts;
     }
-
-
-
 }
