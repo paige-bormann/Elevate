@@ -23,9 +23,8 @@ public class ElevateRepository {
         mAllWorkouts= mWorkoutDao.getAllWorkouts();
     }
 
-    LiveData<UserAccount> findUserAccountByName(UserAccount userAccount) {
-        LiveData<UserAccount> theUserAccount = mUserAccountDao.findByName(userAccount.getName(), userAccount.getPassword());
-        return theUserAccount;
+    UserAccount findUserAccountByName(UserAccount userAccount) {
+        return mUserAccountDao.findByName(userAccount.getName(), userAccount.getPassword());
     }
 
     //UserAccount database methods

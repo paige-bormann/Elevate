@@ -29,6 +29,7 @@ public abstract class ElevateRoomDatabase extends RoomDatabase {
                             ElevateRoomDatabase.class, "elevate_database")
                             .fallbackToDestructiveMigration()
                             .fallbackToDestructiveMigrationFrom(1)
+                            .allowMainThreadQueries()
                             .build();
                 }
             }

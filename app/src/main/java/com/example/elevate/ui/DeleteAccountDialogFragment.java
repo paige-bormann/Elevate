@@ -46,8 +46,6 @@ public class DeleteAccountDialogFragment extends DialogFragment {
                             Activity activity = requireActivity();
                             UserAccount currentUser = mElevateViewModel.getCurrentUser();
                             mElevateViewModel.delete(currentUser);
-                            //LiveData<UserAccount> userAccountLiveData = mElevateViewModel.getUserAccount(user);
-                            //mElevateViewModel.delete(userAccountLiveData.getValue());
                             Toast.makeText(activity.getApplicationContext(), "UserAccount deleted", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(activity, SignInActivity.class));
                             activity.finish();

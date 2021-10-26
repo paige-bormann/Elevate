@@ -25,7 +25,7 @@ public class ElevateViewModel  extends AndroidViewModel {
         mCurrentUser = null;
     }
 
-    public boolean containsUserAccount(UserAccount userAccount) {
+/*    public boolean containsUserAccount(UserAccount userAccount) {
         boolean accountInList = false;
         LiveData<List<UserAccount>> userAccountListData = this.getAllNames();
         List<UserAccount> userAccountList = userAccountListData.getValue();
@@ -36,27 +36,28 @@ public class ElevateViewModel  extends AndroidViewModel {
         }
 
         return accountInList;
-    }
+    }*/
 
-/*    public boolean containsUserAccount(UserAccount userAccount) {
+    public boolean containsUserAccount(UserAccount userAccount) {
         boolean accountInList = false;
 
-        LiveData<UserAccount> userAccountLiveData = mRepository.findUserAccountByName(userAccount);
-        UserAccount theUserAccount = userAccountLiveData.getValue();
-        if (Objects.requireNonNull(theUserAccount).getName().equals(userAccount.getName()) &&
-                Objects.requireNonNull(theUserAccount).getPassword().equals(userAccount.getPassword())) {
-            accountInList = true;
-            mCurrentUser = theUserAccount;
+        UserAccount user = mRepository.findUserAccountByName(userAccount);
+        if (user != null) {
+            if (Objects.requireNonNull(user).getName().equals(userAccount.getName()) &&
+                    Objects.requireNonNull(user).getPassword().equals(userAccount.getPassword())) {
+                accountInList = true;
+                mCurrentUser = user;
+            }
         }
 
         return accountInList;
-    }*/
+    }
 
     public UserAccount getCurrentUser() {
         return mCurrentUser;
     }
 
-    public LiveData<UserAccount> getUserAccount(UserAccount userAccount) {
+    public UserAccount getUserAccount(UserAccount userAccount) {
         return mRepository.findUserAccountByName(userAccount);
     }
 

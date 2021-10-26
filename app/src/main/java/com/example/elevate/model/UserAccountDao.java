@@ -32,6 +32,6 @@ public interface UserAccountDao {
     public LiveData<List<UserAccount>> getAllNames();
 
     @Query("SELECT rowid, name, password, currentLevel, goalLevel FROM useraccount WHERE name LIKE :name AND password LIKE :password LIMIT 1")
-    public LiveData<UserAccount> findByName(String name, String password);
+    public UserAccount findByName(String name, String password);
 }
 
