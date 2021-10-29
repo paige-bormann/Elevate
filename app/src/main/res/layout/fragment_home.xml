@@ -27,6 +27,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/goal_skill_level_textview"
+        android:layout_width="292dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/goal_level"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/skill_level_textview" />
+
     <Button
         android:id="@+id/survey_button"
         android:layout_width="150dp"

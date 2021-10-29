@@ -2,6 +2,7 @@ package com.example.elevate.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Button mProgressButton;
     private Button mSettingsButton;
     private TextView mSkillLevelTextView;
+    private TextView mGoalLevelTextView;
 
     private ElevateViewModel mElevateViewModel;
 
@@ -70,6 +72,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         mSkillLevelTextView = v.findViewById(R.id.skill_level_textview);
         mSkillLevelTextView.setText("Current Skill Level: " + user.mCLevel);
+        mGoalLevelTextView = v.findViewById(R.id.goal_skill_level_textview);
+        mGoalLevelTextView.setText("Goal Skill Level: " + user.mGLevel);
         mSkillSurveyButton = v.findViewById(R.id.survey_button);
         if (mSkillSurveyButton != null) {
             mSkillSurveyButton.setOnClickListener(this);
@@ -96,6 +100,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Activity activity = requireActivity();
         final int viewId = v.getId();
         if (viewId == R.id.survey_button) {
             FragmentManager fm = getParentFragmentManager();

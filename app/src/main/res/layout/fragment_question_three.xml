@@ -5,61 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/question_one_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/question_one"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/next_button"
+        android:id="@+id/submit_survey_button"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginBottom="100dp"
-        android:text="@string/button_next"
+        android:text="@string/button_submit_survey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/question_three_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/question_three"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RadioGroup
-        android:id="@+id/answer_one_radiogroup"
+        android:id="@+id/answer_three_radiogroup"
         android:layout_width="300dp"
         android:layout_height="380dp"
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_one_textview">
+        app:layout_constraintTop_toBottomOf="@+id/question_three_textview" >
 
         <RadioButton
-            android:id="@+id/beginner_radiobutton"
+            android:id="@+id/beginner_radiobutton_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/beginner" />
 
         <RadioButton
-            android:id="@+id/intermediate_radiobutton"
+            android:id="@+id/intermediate_radiobutton_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/intermediate" />
 
         <RadioButton
-            android:id="@+id/advanced_radiobutton"
+            android:id="@+id/advanced_radiobutton_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/advanced" />
 
         <RadioButton
-            android:id="@+id/elite_radiobutton"
+            android:id="@+id/elite_radiobutton_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/elite" />
 
         <RadioButton
-            android:id="@+id/professional_radiobutton"
+            android:id="@+id/professional_radiobutton_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/professional" />

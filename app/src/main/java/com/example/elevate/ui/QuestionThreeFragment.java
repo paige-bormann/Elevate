@@ -1,12 +1,12 @@
 package com.example.elevate.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
@@ -14,8 +14,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -23,14 +21,12 @@ import com.example.elevate.R;
 import com.example.elevate.model.ElevateViewModel;
 import com.example.elevate.model.UserAccount;
 
-import java.util.List;
-
 import timber.log.Timber;
 
-public class QuestionOneFragment extends Fragment implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class QuestionThreeFragment extends Fragment implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private ElevateViewModel mElevateViewModel;
     private RadioGroup mRadioGroup;
-    private Button mNextButton;
+    private Button mSubmitButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,15 +56,15 @@ public class QuestionOneFragment extends Fragment implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView() called");
 
-        View v = inflater.inflate(R.layout.fragment_question_one, container, false);
+        View v = inflater.inflate(R.layout.fragment_question_three, container, false);
 
-        mRadioGroup = v.findViewById(R.id.answer_one_radiogroup);
+        mRadioGroup = v.findViewById(R.id.answer_three_radiogroup);
         if (mRadioGroup != null) {
             mRadioGroup.setOnCheckedChangeListener(this);
         }
-        mNextButton = v.findViewById(R.id.next_button);
-        if (mNextButton != null) {
-            mNextButton.setOnClickListener(this);
+        mSubmitButton = v.findViewById(R.id.submit_survey_button);
+        if (mSubmitButton != null) {
+            mSubmitButton.setOnClickListener(this);
         }
 
         return v;
@@ -77,7 +73,7 @@ public class QuestionOneFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         FragmentManager fm = getParentFragmentManager();
-        Fragment fragment = new QuestionTwoFragment();
+        Fragment fragment = new HomeFragment();
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(fragment.toString())
@@ -87,20 +83,20 @@ public class QuestionOneFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         UserAccount user = mElevateViewModel.getCurrentUser();
-        if (checkedId == R.id.beginner_radiobutton) {
-            user.setCLevel(1);
+        if (checkedId == R.id.beginner_radiobutton_three) {
+            user.setGLevel(1);
             mElevateViewModel.update(user);
-        } else if (checkedId == R.id.intermediate_radiobutton) {
-            user.setCLevel(2);
+        } else if (checkedId == R.id.intermediate_radiobutton_three) {
+            user.setGLevel(2);
             mElevateViewModel.update(user);
-        } else if (checkedId == R.id.advanced_radiobutton) {
-            user.setCLevel(3);
+        } else if (checkedId == R.id.advanced_radiobutton_three) {
+            user.setGLevel(3);
             mElevateViewModel.update(user);
-        } else if (checkedId == R.id.elite_radiobutton) {
-            user.setCLevel(4);
+        } else if (checkedId == R.id.elite_radiobutton_three) {
+            user.setGLevel(4);
             mElevateViewModel.update(user);
-        } else if (checkedId == R.id.professional_radiobutton) {
-            user.setCLevel(5);
+        } else if (checkedId == R.id.professional_radiobutton_three) {
+            user.setGLevel(5);
             mElevateViewModel.update(user);
         }
     }
