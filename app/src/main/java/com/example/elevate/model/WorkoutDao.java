@@ -22,7 +22,7 @@ public interface WorkoutDao { //create methods and annotate, room will automatic
     public void delete(Workout workout);
 
     @Query("SELECT rowid, name, style, grade, tutorial FROM workout_table WHERE rowid LIKE :mWorkoutId LIMIT 1")
-    public LiveData<Workout> findById(int mWorkoutId);
+    public Workout findById(int mWorkoutId);
 
     @Query("DELETE FROM workout_table") //delete all workouts
     public void deleteAllWorkouts();
@@ -30,5 +30,4 @@ public interface WorkoutDao { //create methods and annotate, room will automatic
     // * means all columns
     @Query("SELECT rowid, name, style, grade, tutorial FROM workout_table ORDER BY rowid DESC") //get all of the workouts?
     public LiveData<List<Workout>> getAllWorkouts(); //liveData wrapper
-
 }

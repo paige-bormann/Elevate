@@ -66,6 +66,8 @@ public class ElevateViewModel  extends AndroidViewModel {
     }
 
 
+    public Workout getWorkout(int id) { return mRepository.findWorkoutById(id); }
+
     //workout db methods
     public void insert(Workout workout){
         mRepository.insert(workout);

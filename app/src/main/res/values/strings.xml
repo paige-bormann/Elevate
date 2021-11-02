@@ -7,6 +7,7 @@
     <string name="climbing_plan">Climbing Plan</string>
     <string name="near_me">Climbing Near Me</string>
     <string name="my_progress">My Progress</string>
+    <string name="workout">Workout</string>
     <string name="button_sign_in">Sign In</string>
     <string name="button_sign_up">Sign Up</string>
     <string name="button_sign_out">Sign Out</string>
@@ -15,6 +16,7 @@
     <string name="button_delete_account">Delete Account</string>
     <string name="button_next">Next</string>
     <string name="button_submit_survey">Submit</string>
+    <string name="button_complete_workout">Mark As Complete</string>
     <string name="username">Username</string>
     <string name="username_hint">Enter username</string>
     <string name="password">Password</string>

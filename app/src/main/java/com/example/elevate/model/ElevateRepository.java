@@ -58,7 +58,6 @@ public class ElevateRepository {
     }
 
 
-
     //Workout database method bodies
     public void insert(Workout workout){
         ElevateRoomDatabase.databaseWriteExecutor.execute(() -> {
@@ -87,5 +86,9 @@ public class ElevateRepository {
     //returns LiveData
     LiveData<List<Workout>> getAllWorkouts(){
         return mAllWorkouts;
+    }
+
+    Workout findWorkoutById(int id) {
+        return mWorkoutDao.findById(id);
     }
 }

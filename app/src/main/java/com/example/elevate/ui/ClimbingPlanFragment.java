@@ -3,10 +3,10 @@ package com.example.elevate.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RadioGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,30 +15,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchUIUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elevate.R;
 import com.example.elevate.model.ElevateViewModel;
-import com.example.elevate.model.UserAccount;
 import com.example.elevate.model.Workout;
+import com.example.elevate.model.WorkoutAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
 
-public class ClimbingPlanFragment extends Fragment implements View.OnClickListener {
+public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnWorkoutListener {
     private ElevateViewModel mElevateViewModel;
-    private Button mNewWorkoutButton;
-    private Button mUpdateWorkoutButton;
-    private Button mDeleteWorkoutButton;
-    private TextView mNameTextView;
-    private TextView mStyleTextView;
-    private TextView mGradeTextView;
-    private TextView mTutorialTextView;
-    private List<Workout> allWorkouts;
+    private List<Workout> mWorkouts = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,42 +65,20 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView() called");
 
-        View v = inflater.inflate(R.layout.fragment_workouts, container, false);
-
-        mNameTextView = v.findViewById(R.id.name_display_textview);
-        mStyleTextView = v.findViewById(R.id.style_display_textview);
-        mGradeTextView = v.findViewById(R.id.grade_display_textview);
-        mTutorialTextView = v.findViewById(R.id.tutorial_display_textview);
-
-        mNewWorkoutButton = v.findViewById(R.id.new_workout_button);
-        if (mNewWorkoutButton != null) {
-            mNewWorkoutButton.setOnClickListener(this);
-        }
-        mUpdateWorkoutButton = v.findViewById(R.id.update_workout_button);
-        if (mUpdateWorkoutButton != null) {
-            mUpdateWorkoutButton.setOnClickListener(this);
-        }
-        mDeleteWorkoutButton = v.findViewById(R.id.delete_workout_button);
-        if (mDeleteWorkoutButton != null) {
-            mDeleteWorkoutButton.setOnClickListener(this);
-        }
-
         Activity activity = requireActivity();
+        View v = inflater.inflate(R.layout.fragment_climbing_plan, container, false);
+
+        RecyclerView recyclerView = v.findViewById(R.id.climbing_plan_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        final WorkoutAdapter adapter = new WorkoutAdapter(mWorkouts, this);
+        recyclerView.setAdapter(adapter);
+
         mElevateViewModel.getAllWorkouts().observe((LifecycleOwner) activity, new Observer<List<Workout>>() {
             @Override
-            public void onChanged(List<Workout> workouts) {
-                allWorkouts = workouts;
-                if (allWorkouts != null && allWorkouts.size() >=  1) {
-                    mNameTextView.setText(allWorkouts.get(0).getName());
-                    mStyleTextView.setText(allWorkouts.get(0).getStyle());
-                    mGradeTextView.setText(String.valueOf(allWorkouts.get(0).getGrade()));
-                    mTutorialTextView.setText(allWorkouts.get(0).getTutorial());
-                } else {
-                    mNameTextView.setText("Name");
-                    mStyleTextView.setText("Style");
-                    mGradeTextView.setText("Grade");
-                    mTutorialTextView.setText("Tutorial");
-                }
+            public void onChanged(List<Workout> workoutList) {
+                mWorkouts = workoutList;
+                adapter.setWorkouts(workoutList);
+
             }
         });
 
@@ -111,26 +86,17 @@ public class ClimbingPlanFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void onClick(View v) {
-        final int viewId = v.getId();
-        if (viewId == R.id.new_workout_button) {
-            FragmentManager fm = getParentFragmentManager();
-            Fragment fragment = new NewWorkoutFragment();
-            fm.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(fragment.toString())
-                    .commit();
-        } else if (viewId == R.id.update_workout_button) {
-            FragmentManager fm = getParentFragmentManager();
-            Fragment fragment = new UpdateWorkoutFragment();
-            fm.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(fragment.toString())
-                    .commit();
-        } else if (viewId == R.id.delete_workout_button) {
-            if (allWorkouts != null && allWorkouts.size() >=  1) {
-                mElevateViewModel.delete(allWorkouts.get(0));
-            }
-        }
+    public void onWorkoutClick(int position) {
+        Workout workout = mWorkouts.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("id", String.valueOf(workout.getWorkoutId()));
+
+        FragmentManager fm = getParentFragmentManager();
+        Fragment fragment = new WorkoutFragment();
+        fragment.setArguments(bundle);
+        fm.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(fragment.toString())
+                .commit();
     }
 }

@@ -2,6 +2,7 @@ package com.example.elevate.model;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -31,6 +32,12 @@ public abstract class ElevateRoomDatabase extends RoomDatabase {
                             .fallbackToDestructiveMigrationFrom(1)
                             .allowMainThreadQueries()
                             .build();
+
+                    // Pre-populate database with the pre-defined workouts
+                    //Workout workout = new Workout("Workout1", "Power/Technique", 0, "www.youtube.com");
+                    //INSTANCE.workoutDao().insert(workout);
+                    //workout = new Workout("Workout2", "Power/Technique", 1, "www.youtube.com");
+                    //INSTANCE.workoutDao().insert(workout);
                 }
             }
         }
@@ -38,3 +45,4 @@ public abstract class ElevateRoomDatabase extends RoomDatabase {
         //instantiates if null, if not, it returns the already existing instance
     }
 }
+

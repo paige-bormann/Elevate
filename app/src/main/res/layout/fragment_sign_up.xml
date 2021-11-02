@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/confirm_password_text" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/workout_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -89,5 +89,5 @@
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_info" />
 </androidx.constraintlayout.widget.ConstraintLayout>
