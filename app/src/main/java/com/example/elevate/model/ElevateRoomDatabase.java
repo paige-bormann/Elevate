@@ -33,7 +33,8 @@ public abstract class ElevateRoomDatabase extends RoomDatabase {
                             .allowMainThreadQueries()
                             .build();
 
-                    // Pre-populate database with the pre-defined workouts
+                    // TODO: Find "best practice" way to prepopulate database with workout data.
+                    // Uncomment first time initialization, comment out otherwise
                     //Workout workout = new Workout("Workout1", "Power/Technique", 0, "www.youtube.com");
                     //INSTANCE.workoutDao().insert(workout);
                     //workout = new Workout("Workout2", "Power/Technique", 1, "www.youtube.com");

@@ -3,11 +3,8 @@ package com.example.elevate.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -18,14 +15,11 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.ItemTouchUIUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elevate.R;
 import com.example.elevate.model.ElevateViewModel;
-import com.example.elevate.model.UserAccount;
 import com.example.elevate.model.Workout;
 import com.example.elevate.model.WorkoutAdapter;
 
@@ -34,7 +28,7 @@ import java.util.List;
 
 import timber.log.Timber;
 
-public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnWorkoutListener {
+public class ProgressFragment extends Fragment implements WorkoutAdapter.OnWorkoutListener {
     private ElevateViewModel mElevateViewModel;
     private List<Workout> mWorkouts = new ArrayList<>();
 
@@ -54,7 +48,7 @@ public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnW
 
             ActionBar actionBar = activity.getSupportActionBar();
             if (actionBar != null) {
-                actionBar.setSubtitle(getResources().getString(R.string.climbing_plan));
+                actionBar.setSubtitle(getResources().getString(R.string.my_progress));
             }
         }
         catch (NullPointerException npe) {
@@ -77,12 +71,11 @@ public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnW
         mElevateViewModel.getAllWorkouts().observe((LifecycleOwner) activity, new Observer<List<Workout>>() {
             @Override
             public void onChanged(List<Workout> workoutList) {
-                // Filter workouts to only include incomplete workouts within user's current/goal grade
+                // Filter workouts to only include complete workouts
                 mWorkouts.clear();
                 for (int i = 0; i < workoutList.size(); i++) {
                     Workout currentWorkout = workoutList.get(i);
-                    if (!currentWorkout.getCompleted() &&
-                            checkGradeWithinGoal(currentWorkout, mElevateViewModel.getCurrentUser())) {
+                    if (currentWorkout.getCompleted() && !mWorkouts.contains(currentWorkout)) {
                         mWorkouts.add(currentWorkout);
                     }
                 }
@@ -106,42 +99,5 @@ public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnW
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(fragment.toString())
                 .commit();
-    }
-
-    public boolean checkGradeWithinGoal(Workout workout, UserAccount user) {
-        int startLevel = 0, endLevel = 0;
-        int currentLevel = user.mCLevel;
-        int goalLevel = user.mGLevel;
-        boolean withinGoal = false;
-
-        if (currentLevel == 1) {
-            startLevel = 0;
-        } else if (currentLevel == 2) {
-            startLevel = 3;
-        } else if (currentLevel == 3) {
-            startLevel = 6;
-        } else if (currentLevel == 4) {
-            startLevel = 10;
-        } else if (currentLevel == 5) {
-            startLevel = 13;
-        }
-
-        if (goalLevel == 1) {
-            endLevel = 2;
-        } else if (goalLevel == 2) {
-            endLevel = 5;
-        } else if (goalLevel == 3) {
-            endLevel = 9;
-        } else if (goalLevel == 4) {
-            endLevel = 12;
-        } else if (goalLevel == 5) {
-            endLevel = 17;
-        }
-
-        if (workout.getGrade() >= startLevel && workout.getGrade() <= endLevel) {
-            withinGoal = true;
-        }
-
-        return withinGoal;
     }
 }

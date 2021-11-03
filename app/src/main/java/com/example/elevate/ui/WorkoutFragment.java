@@ -78,6 +78,9 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
         }
 
         mCompleteWorkoutButton = v.findViewById(R.id.complete_button);
+        if (mWorkout.getCompleted()) {
+            mCompleteWorkoutButton.setText(getResources().getString(R.string.button_incomplete_workout));
+        }
         if (mCompleteWorkoutButton != null) {
             mCompleteWorkoutButton.setOnClickListener(this);
         }
@@ -88,9 +91,15 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         FragmentActivity activity = requireActivity();
-        // mark workout as complete
-        // mWorkout.setComplete();
-        // mElevateViewModel.update(mWorkout);
-        Toast.makeText(activity.getApplicationContext(), "Workout completed.", Toast.LENGTH_SHORT).show();
+        // toggle workout complete
+        if (mWorkout.getCompleted()) {
+            mWorkout.setCompleted(false);
+            mElevateViewModel.update(mWorkout);
+            Toast.makeText(activity.getApplicationContext(), "Workout uncompleted.", Toast.LENGTH_SHORT).show();
+        } else {
+            mWorkout.setCompleted(true);
+            mElevateViewModel.update(mWorkout);
+            Toast.makeText(activity.getApplicationContext(), "Workout completed.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
