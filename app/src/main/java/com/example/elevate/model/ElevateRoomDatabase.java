@@ -31,19 +31,27 @@ public abstract class ElevateRoomDatabase extends RoomDatabase {
                             .fallbackToDestructiveMigration()
                             .fallbackToDestructiveMigrationFrom(1)
                             .allowMainThreadQueries()
+                            .addCallback(prepopulate)
                             .build();
-
-                    // TODO: Find "best practice" way to prepopulate database with workout data.
-                    // Uncomment first time initialization, comment out otherwise
-                    //Workout workout = new Workout("Workout1", "Power/Technique", 0, "www.youtube.com");
-                    //INSTANCE.workoutDao().insert(workout);
-                    //workout = new Workout("Workout2", "Power/Technique", 1, "www.youtube.com");
-                    //INSTANCE.workoutDao().insert(workout);
                 }
             }
         }
         return INSTANCE;
         //instantiates if null, if not, it returns the already existing instance
     }
+
+    private static RoomDatabase.Callback prepopulate = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            databaseWriteExecutor.execute(() -> {
+                // Add pre-made workouts here to populate the database
+                Workout workout = new Workout("Workout1", "Power/Technique", 0, "www.youtube.com");
+                INSTANCE.workoutDao().insert(workout);
+                workout = new Workout("Workout2", "Power/Technique", 1, "www.youtube.com");
+                INSTANCE.workoutDao().insert(workout);
+            });
+        }
+    };
 }
 
