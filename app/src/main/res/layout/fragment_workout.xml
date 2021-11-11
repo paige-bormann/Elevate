@@ -9,17 +9,28 @@
         android:id="@+id/complete_button"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="525dp"
+        android:layout_marginTop="16dp"
         android:text="@string/button_complete_workout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tutorial_button" />
+
+    <Button
+        android:id="@+id/tutorial_button"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="500dp"
+        android:text="@string/button_tutorial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/name_display_textview"
+        android:id="@+id/workout_textview"
         android:layout_width="292dp"
         android:layout_height="41dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:text="@string/name"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -31,34 +42,23 @@
         android:id="@+id/style_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
         android:layout_marginTop="30dp"
         android:text="@string/style"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_display_textview" />
-
-    <TextView
-        android:id="@+id/grade_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/grade"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style_textview" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@+id/workout_textview"
+        app:layout_constraintTop_toBottomOf="@+id/workout_textview" />
 
     <TextView
         android:id="@+id/tutorial_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:text="@string/tutorial"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grade_textview" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@+id/style_textview"
+        app:layout_constraintTop_toBottomOf="@+id/style_textview" />
 
     <TextView
         android:id="@+id/style_display_textview"
@@ -66,17 +66,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/style"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toEndOf="@+id/style_textview"
         app:layout_constraintTop_toTopOf="@+id/style_textview" />
-
-    <TextView
-        android:id="@+id/grade_display_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/grade"
-        app:layout_constraintStart_toEndOf="@+id/grade_textview"
-        app:layout_constraintTop_toTopOf="@+id/grade_textview" />
 
     <TextView
         android:id="@+id/tutorial_display_textview"
@@ -84,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/tutorial"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toEndOf="@+id/tutorial_textview"
         app:layout_constraintTop_toTopOf="@+id/tutorial_textview" />
 

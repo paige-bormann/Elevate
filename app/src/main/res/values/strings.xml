@@ -18,6 +18,7 @@
     <string name="button_submit_survey">Submit</string>
     <string name="button_complete_workout">Mark As Complete</string>
     <string name="button_incomplete_workout">Mark As Incomplete</string>
+    <string name="button_tutorial">Watch Tutorial</string>
     <string name="username">Username</string>
     <string name="username_hint">Enter username</string>
     <string name="password">Password</string>

@@ -14,6 +14,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -25,10 +26,10 @@ import timber.log.Timber;
 
 public class WorkoutFragment extends Fragment implements View.OnClickListener {
     private ElevateViewModel mElevateViewModel;
-    private TextView mNameTextView;
+    private TextView mWorkoutTextView;
     private TextView mStyleTextView;
-    private TextView mGradeTextView;
     private TextView mTutorialTextView;
+    private Button mTutorialButton;
     private Button mCompleteWorkoutButton;
     private Workout mWorkout;
 
@@ -66,15 +67,19 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
             int id = Integer.parseInt(bundle.get("id").toString());
             mWorkout = mElevateViewModel.getWorkout(id);
 
-            mNameTextView = v.findViewById(R.id.name_display_textview);
+            mWorkoutTextView = v.findViewById(R.id.workout_textview);
             mStyleTextView = v.findViewById(R.id.style_display_textview);
-            mGradeTextView = v.findViewById(R.id.grade_display_textview);
             mTutorialTextView = v.findViewById(R.id.tutorial_display_textview);
 
-            mNameTextView.setText(mWorkout.getName());
+            String grade = "V" + String.valueOf(mWorkout.getGrade());
+            mWorkoutTextView.setText(mWorkout.getName() + " (" + grade + ")");
             mStyleTextView.setText(mWorkout.getStyle());
-            mGradeTextView.setText("V" + String.valueOf(mWorkout.getGrade()));
             mTutorialTextView.setText(mWorkout.getTutorial());
+        }
+
+        mTutorialButton = v.findViewById(R.id.tutorial_button);
+        if (mTutorialButton != null) {
+            mTutorialButton.setOnClickListener(this);
         }
 
         mCompleteWorkoutButton = v.findViewById(R.id.complete_button);
@@ -90,16 +95,34 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        FragmentActivity activity = requireActivity();
-        // toggle workout complete
-        if (mWorkout.getCompleted()) {
-            mWorkout.setCompleted(false);
-            mElevateViewModel.update(mWorkout);
-            Toast.makeText(activity.getApplicationContext(), "Workout uncompleted.", Toast.LENGTH_SHORT).show();
-        } else {
-            mWorkout.setCompleted(true);
-            mElevateViewModel.update(mWorkout);
-            Toast.makeText(activity.getApplicationContext(), "Workout completed.", Toast.LENGTH_SHORT).show();
+        Activity activity = requireActivity();
+        final int viewId = view.getId();
+        //FragmentActivity activity = requireActivity();
+
+        if (viewId == R.id.tutorial_button) {
+            // Open tutorial fragment
+            Bundle bundle = new Bundle();
+            bundle.putString("id", String.valueOf(mWorkout.getWorkoutId()));
+
+            FragmentManager fm = getParentFragmentManager();
+            Fragment fragment = new TutorialFragment();
+            fragment.setArguments(bundle);
+            fm.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(fragment.toString())
+                    .commit();
+        } else if (viewId == R.id.complete_button) {
+            // toggle workout complete
+            if (mWorkout.getCompleted()) {
+                mWorkout.setCompleted(false);
+                mElevateViewModel.update(mWorkout);
+                Toast.makeText(activity.getApplicationContext(), "Workout uncompleted.", Toast.LENGTH_SHORT).show();
+            } else {
+                mWorkout.setCompleted(true);
+                mElevateViewModel.update(mWorkout);
+                Toast.makeText(activity.getApplicationContext(), "Workout completed.", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
 }
