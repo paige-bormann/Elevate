@@ -118,6 +118,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     .commit();
         } else if (viewId == R.id.near_me_button) {
             // open near me page
+            FragmentManager fm=getParentFragmentManager();
+            Fragment fragment = new ClimbingNearMeFragment();
+            fm.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(fragment.toString())
+                    .commit();
         } else if (viewId == R.id.progress_button) {
             FragmentManager fm = getParentFragmentManager();
             Fragment fragment = new ProgressFragment();
