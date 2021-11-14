@@ -77,8 +77,8 @@ public class TutorialFragment extends Fragment {
             WebSettings webSettings = mWebView.getSettings();
             webSettings.setJavaScriptEnabled(true);
             // default video now for testing, change to get workout tutorial once in database
-            mWebView.loadUrl("https://www.youtube.com/watch?v=gLfvk2SSj1c");
-            //mWebView.loadUrl(mWorkout.getTutorial());
+            //mWebView.loadUrl("https://www.youtube.com/watch?v=gLfvk2SSj1c");
+            mWebView.loadUrl(mWorkout.getTutorial());
         }
 
         return v;

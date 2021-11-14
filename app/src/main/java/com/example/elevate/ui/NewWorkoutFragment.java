@@ -82,12 +82,15 @@ public class NewWorkoutFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         final String name = mNameEditText.getText().toString();
         final String style = mStyleEditText.getText().toString();
+
         final int grade = Integer.parseInt(mGradeEditText.getText().toString());
         final String tutorial = mTutorialEditText.getText().toString();
 
-        FragmentActivity activity = requireActivity();
+        /*FragmentActivity activity = requireActivity();
         Workout workout = new Workout(name, style, grade, tutorial);
         mElevateViewModel.insert(workout);
         Toast.makeText(activity.getApplicationContext(), "New Workout added", Toast.LENGTH_SHORT).show();
+        */
+
     }
 }

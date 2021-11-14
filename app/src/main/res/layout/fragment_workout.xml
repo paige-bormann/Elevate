@@ -80,4 +80,15 @@
         app:layout_constraintStart_toEndOf="@+id/tutorial_textview"
         app:layout_constraintTop_toTopOf="@+id/tutorial_textview" />
 
+    <TextView
+        android:id="@+id/Desc_textView"
+        android:layout_width="279dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="56dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/tutorial_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tutorial_display_textview" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

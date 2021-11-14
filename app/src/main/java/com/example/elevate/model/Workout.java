@@ -16,6 +16,8 @@ public class Workout {
 
     private String name;
 
+    private String description;
+
     private String style;
 
     private int grade; //int with value 0-17, corresponding to a V-grade
@@ -25,12 +27,13 @@ public class Workout {
     private boolean completed;
 
     //Constructor
-    public Workout(String name, String style, int grade, String tutorial) { //constructor
+    public Workout(String name, String style, String description, int grade, String tutorial) { //constructor
         this.name = name;
         this.style = style;
         this.grade = grade;
         this.tutorial = tutorial;
         this.completed = false;
+        this.description=description;
     }
 
     //setters
@@ -47,6 +50,10 @@ public class Workout {
     public void setTutorial(String tutorial) { this.tutorial = tutorial; }
 
     public void setCompleted(boolean completed) { this.completed = completed; }
+
+    public void setDesc(String desc){
+        this.description=desc;
+    }
 
     //getters
     public int getWorkoutId() {
@@ -70,6 +77,10 @@ public class Workout {
     }
 
     public boolean getCompleted() { return completed; }
+
+    public String getDescription(){
+        return description;
+    }
 
 /*public Workout(@NonNull int workId) {this.mWorkoutId = workId;} //setter?
 
