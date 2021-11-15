@@ -54,6 +54,7 @@
     <string name="button_create_workout">Create Workout</string>
     <string name="button_delete_workouts">Delete Workout</string>
     <string name="button_update_workout">Update Workout</string>
+    <string name="map_search_hint">Enter Address, City, or Zip Code</string>
 
 
     <!-- Dialog Text -->

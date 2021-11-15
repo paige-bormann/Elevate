@@ -29,8 +29,12 @@
     <TextView
         android:id="@+id/workout_textview"
         android:layout_width="292dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:scrollHorizontally="false"
         android:text="@string/name"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -62,21 +66,31 @@
 
     <TextView
         android:id="@+id/style_display_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:scrollHorizontally="false"
         android:text="@string/style"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="@+id/tutorial_display_textview"
         app:layout_constraintStart_toEndOf="@+id/style_textview"
         app:layout_constraintTop_toTopOf="@+id/style_textview" />
 
     <TextView
         android:id="@+id/tutorial_display_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:scrollHorizontally="false"
         android:text="@string/tutorial"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="@+id/Desc_textView"
         app:layout_constraintStart_toEndOf="@+id/tutorial_textview"
         app:layout_constraintTop_toTopOf="@+id/tutorial_textview" />
 
@@ -86,6 +100,7 @@
         android:layout_height="194dp"
         android:layout_marginTop="56dp"
         android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/tutorial_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

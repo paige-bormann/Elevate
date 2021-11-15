@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.security.Permission;
 import java.util.Map;
 
+import timber.log.Timber;
+
 public class ClimbingNearMeFragment extends Fragment implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
@@ -38,6 +41,22 @@ public class ClimbingNearMeFragment extends Fragment implements OnMapReadyCallba
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            AppCompatActivity activity = (AppCompatActivity) requireActivity();
+
+            ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setSubtitle(getResources().getString(R.string.near_me));
+            }
+        }
+        catch (NullPointerException npe) {
+            Timber.e("Could not set subtitle");
+        }
     }
 
     @Override
