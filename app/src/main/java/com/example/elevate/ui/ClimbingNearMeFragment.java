@@ -1,5 +1,7 @@
 package com.example.elevate.ui;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.elevate.R;
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.security.Permission;
 import java.util.Map;
 
 public class ClimbingNearMeFragment extends Fragment implements OnMapReadyCallback {
@@ -25,6 +29,8 @@ public class ClimbingNearMeFragment extends Fragment implements OnMapReadyCallba
     GoogleMap mGoogleMap;
     MapView mMapView;
     View mView;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private boolean permissionDenied = false;
     public ClimbingNearMeFragment(){
 
     }
@@ -65,4 +71,21 @@ public class ClimbingNearMeFragment extends Fragment implements OnMapReadyCallba
 
 
     }
+
+    private void enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            if (mGoogleMap != null) {
+                //mGoogleMap.setMyLocationEnabled(true);
+            }
+        } else {
+            // Permission to access the location is missing. Show rationale and request permission
+
+            //PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    //Manifest.permission.ACCESS_FINE_LOCATION, true);
+        }
+    }
+
+
+
 }
