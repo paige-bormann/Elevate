@@ -70,13 +70,13 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
 
             mWorkoutTextView = v.findViewById(R.id.workout_textview);
             mStyleTextView = v.findViewById(R.id.style_display_textview);
-            mTutorialTextView = v.findViewById(R.id.tutorial_display_textview);
+            //mTutorialTextView = v.findViewById(R.id.tutorial_display_textview);
             mDescriptionTextView=v.findViewById(R.id.Desc_textView);
 
             String grade = "V" + String.valueOf(mWorkout.getGrade());
             mWorkoutTextView.setText(mWorkout.getName() + " (" + grade + ")");
             mStyleTextView.setText(mWorkout.getStyle());
-            mTutorialTextView.setText(mWorkout.getTutorial());
+            //mTutorialTextView.setText(mWorkout.getTutorial());
             mDescriptionTextView.setText(mWorkout.getDescription());
         }
 

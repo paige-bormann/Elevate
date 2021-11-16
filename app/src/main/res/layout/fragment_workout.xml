@@ -48,12 +48,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/style"
-        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/workout_textview"
         app:layout_constraintTop_toBottomOf="@+id/workout_textview" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/tutorial_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="@+id/style_textview"
         app:layout_constraintTop_toBottomOf="@+id/style_textview" />
-
+        -->
     <TextView
         android:id="@+id/style_display_textview"
         android:layout_width="0dp"
@@ -75,11 +75,12 @@
         android:scrollHorizontally="false"
         android:text="@string/style"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="@+id/tutorial_display_textview"
+        app:layout_constraintBottom_toBottomOf="@+id/style_textview"
         app:layout_constraintStart_toEndOf="@+id/style_textview"
         app:layout_constraintTop_toTopOf="@+id/style_textview" />
+    <!--app:layout_constraintEnd_toEndOf="@+id/tutorial_display_textview"-->
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/tutorial_display_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -93,17 +94,16 @@
         app:layout_constraintEnd_toEndOf="@+id/Desc_textView"
         app:layout_constraintStart_toEndOf="@+id/tutorial_textview"
         app:layout_constraintTop_toTopOf="@+id/tutorial_textview" />
-
+        -->
     <TextView
         android:id="@+id/Desc_textView"
         android:layout_width="279dp"
         android:layout_height="194dp"
-        android:layout_marginTop="56dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/tutorial_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tutorial_display_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/style_display_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
