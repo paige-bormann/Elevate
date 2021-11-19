@@ -9,19 +9,12 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.elevate.R;
 import com.example.elevate.model.ElevateViewModel;
 import com.example.elevate.model.UserAccount;
-
-import java.util.List;
-
-import timber.log.Timber;
 
 /**
  * DialogFragment that gives user delete account confirm message.
@@ -47,7 +40,7 @@ public class DeleteAccountDialogFragment extends DialogFragment {
                             UserAccount currentUser = mElevateViewModel.getCurrentUser();
                             mElevateViewModel.delete(currentUser);
                             Toast.makeText(activity.getApplicationContext(), "UserAccount deleted", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(activity, SignInActivity.class));
+                            startActivity(new Intent(activity, MainActivity.class));
                             activity.finish();
                         } catch (Exception e) {
                             e.printStackTrace();

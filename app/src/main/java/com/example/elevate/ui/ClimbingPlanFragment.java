@@ -37,6 +37,7 @@ import timber.log.Timber;
 public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnWorkoutListener {
     private ElevateViewModel mElevateViewModel;
     private List<Workout> mWorkouts = new ArrayList<>();
+    private TextView mHint;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,8 @@ public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnW
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         final WorkoutAdapter adapter = new WorkoutAdapter(mWorkouts, this);
         recyclerView.setAdapter(adapter);
+        mHint = v.findViewById(R.id.hint_textview);
+        mHint.setVisibility(View.INVISIBLE);
 
         mElevateViewModel.getAllWorkouts().observe((LifecycleOwner) activity, new Observer<List<Workout>>() {
             @Override
@@ -87,6 +90,16 @@ public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnW
                     }
                 }
                 adapter.setWorkouts(mWorkouts);
+
+                if (mElevateViewModel.getCurrentUser().mCLevel == 0 && mWorkouts.size() == 0) {
+                    mHint.setVisibility(View.VISIBLE);
+                    mHint.setText(getResources().getString(R.string.climbing_plan_hint_need_skill));
+                } else if (mElevateViewModel.getCurrentUser().mCLevel != 0 && mWorkouts.size() == 0) {
+                    mHint.setVisibility(View.VISIBLE);
+                    mHint.setText(getResources().getString(R.string.climbing_plan_hint_all_done));
+                } else {
+                    mHint.setVisibility(View.INVISIBLE);
+                }
             }
         });
 

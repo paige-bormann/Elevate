@@ -50,12 +50,15 @@
     <string name="style">Style</string>
     <string name="grade">Grade</string>
     <string name="tutorial">Tutorial</string>
+    <string name="description">Description</string>
     <string name="button_new_workout">New Workout</string>
     <string name="button_create_workout">Create Workout</string>
     <string name="button_delete_workouts">Delete Workout</string>
     <string name="button_update_workout">Update Workout</string>
     <string name="map_search_hint">Enter Address, City, or Zip Code</string>
-
+    <string name="climbing_plan_hint_need_skill">Complete the Skill Level Survey to view suggested workouts for your skill level.</string>
+    <string name="climbing_plan_hint_all_done">You\'ve completed all of the recommended workouts! Update your skill level in the Skill Level Survey to see more workouts.</string>
+    <string name="progress_hint">You haven\'t completed any workouts yet.</string>
 
     <!-- Dialog Text -->
     <string name="error">Error</string>

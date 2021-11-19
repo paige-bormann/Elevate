@@ -20,7 +20,7 @@
         android:theme="@style/Theme.Elevate">
 
         <activity
-            android:name=".ui.SignInActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

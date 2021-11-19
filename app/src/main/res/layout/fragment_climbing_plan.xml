@@ -11,4 +11,22 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/list_item_workout"/>
 
+    <TextView
+        android:id="@+id/hint_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_weight="1"
+        android:maxLines="5"
+        android:scrollHorizontally="false"
+        android:text="@string/climbing_plan"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/climbing_plan_recyclerview" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

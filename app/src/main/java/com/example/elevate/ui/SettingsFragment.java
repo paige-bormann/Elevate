@@ -1,7 +1,6 @@
 package com.example.elevate.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -90,7 +89,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         final int viewId = v.getId();
         if (viewId == R.id.sign_out_button) {
             Activity activity = requireActivity();
-            startActivity(new Intent(activity, SignInActivity.class));
+            startActivity(new Intent(activity, MainActivity.class));
             activity.finish();
         } else if (viewId == R.id.delete_account_button) {
             FragmentManager manager = getParentFragmentManager();

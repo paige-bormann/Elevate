@@ -32,8 +32,9 @@
         android:layout_height="41dp"
         android:layout_marginTop="100dp"
         android:text="@string/user_account"
-        android:textAlignment="center"
         android:textSize="24sp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,6 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/account_textview"
         app:layout_constraintTop_toBottomOf="@+id/account_textview" />
@@ -55,6 +58,8 @@
         android:layout_marginTop="30dp"
         android:text="@string/skill_level"
         android:textStyle="bold"
+        android:textColor="#000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="@+id/username_account_textview"
         app:layout_constraintTop_toBottomOf="@+id/username_account_textview" />
 
@@ -65,6 +70,8 @@
         android:layout_marginTop="30dp"
         android:text="@string/goal_level"
         android:textStyle="bold"
+        android:textColor="#000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="@+id/current_level_textview"
         app:layout_constraintTop_toBottomOf="@+id/current_level_textview" />
 
@@ -74,6 +81,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/username"
+        android:textColor="#000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toEndOf="@+id/username_account_textview"
         app:layout_constraintTop_toTopOf="@+id/username_account_textview" />
 
@@ -83,6 +92,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/skill_level"
+        android:textColor="#000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toEndOf="@+id/current_level_textview"
         app:layout_constraintTop_toTopOf="@+id/current_level_textview" />
 
@@ -92,6 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/goal_level"
+        android:textColor="#000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toEndOf="@+id/goal_level_textview"
         app:layout_constraintTop_toTopOf="@+id/goal_level_textview" />
 </androidx.constraintlayout.widget.ConstraintLayout>

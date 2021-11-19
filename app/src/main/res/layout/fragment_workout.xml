@@ -36,6 +36,7 @@
         android:maxLines="2"
         android:scrollHorizontally="false"
         android:text="@string/name"
+        android:textSize="24sp"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,61 +50,53 @@
         android:layout_marginTop="30dp"
         android:text="@string/style"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/workout_textview"
         app:layout_constraintTop_toBottomOf="@+id/workout_textview" />
 
-    <!--<TextView
-        android:id="@+id/tutorial_textview"
+    <TextView
+        android:id="@+id/description_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/tutorial"
-        android:textStyle="bold"
+        android:text="@string/description"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintStart_toStartOf="@+id/style_textview"
-        app:layout_constraintTop_toBottomOf="@+id/style_textview" />
-        -->
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/style_display_textview"
+        app:layout_constraintTop_toBottomOf="@+id/style_display_textview" />
+
     <TextView
         android:id="@+id/style_display_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="30dp"
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="2"
         android:scrollHorizontally="false"
         android:text="@string/style"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="@+id/style_textview"
-        app:layout_constraintStart_toEndOf="@+id/style_textview"
-        app:layout_constraintTop_toTopOf="@+id/style_textview" />
-    <!--app:layout_constraintEnd_toEndOf="@+id/tutorial_display_textview"-->
+        android:textColor="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/style_textview"
+        app:layout_constraintTop_toBottomOf="@+id/style_textview" />
 
-   <!-- <TextView
-        android:id="@+id/tutorial_display_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:scrollHorizontally="false"
-        android:text="@string/tutorial"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="@+id/Desc_textView"
-        app:layout_constraintStart_toEndOf="@+id/tutorial_textview"
-        app:layout_constraintTop_toTopOf="@+id/tutorial_textview" />
-        -->
     <TextView
         android:id="@+id/Desc_textView"
-        android:layout_width="279dp"
-        android:layout_height="194dp"
-        android:text="TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="10"
+        android:scrollHorizontally="false"
+        android:text="@string/description"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tutorial_button"
+        android:textColor="#000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style_display_textview" />
+        app:layout_constraintStart_toStartOf="@+id/description_textview"
+        app:layout_constraintTop_toBottomOf="@+id/description_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

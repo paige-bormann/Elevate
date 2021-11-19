@@ -213,7 +213,6 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
             mGoogleMap.setMyLocationEnabled(true);
             mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
             init();
-
         }
     }
 

@@ -11,10 +11,10 @@ import timber.log.Timber;
  * Created by paige-bormann on 10/08/2021.
  */
 
-public class SignInActivity extends SingleFragmentActivity {
+public class MainActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
-        return new SignInFragment();
+        return new MainFragment();
     }
 
     @Override

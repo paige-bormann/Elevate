@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -31,6 +32,7 @@ import timber.log.Timber;
 public class ProgressFragment extends Fragment implements WorkoutAdapter.OnWorkoutListener {
     private ElevateViewModel mElevateViewModel;
     private List<Workout> mWorkouts = new ArrayList<>();
+    private TextView mHint;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,8 @@ public class ProgressFragment extends Fragment implements WorkoutAdapter.OnWorko
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         final WorkoutAdapter adapter = new WorkoutAdapter(mWorkouts, this);
         recyclerView.setAdapter(adapter);
+        mHint = v.findViewById(R.id.hint_textview);
+        mHint.setVisibility(View.INVISIBLE);
 
         mElevateViewModel.getAllWorkouts().observe((LifecycleOwner) activity, new Observer<List<Workout>>() {
             @Override
@@ -80,6 +84,18 @@ public class ProgressFragment extends Fragment implements WorkoutAdapter.OnWorko
                     }
                 }
                 adapter.setWorkouts(mWorkouts);
+
+                if (mWorkouts.size() == 0) {
+                    mHint.setVisibility(View.VISIBLE);
+                    if (isAdded()) {
+                        mHint.setText(getResources().getString(R.string.progress_hint));
+                    } else {
+                        mHint.setText("You haven't completed any workouts yet.");
+                    }
+
+                } else {
+                    mHint.setVisibility(View.INVISIBLE);
+                }
             }
         });
 

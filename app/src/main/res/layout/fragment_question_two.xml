@@ -17,9 +17,17 @@
 
     <TextView
         android:id="@+id/question_two_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:maxLines="2"
+        android:scrollHorizontally="false"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000"
         android:text="@string/question_two"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

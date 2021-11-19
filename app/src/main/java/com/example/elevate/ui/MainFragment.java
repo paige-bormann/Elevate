@@ -14,7 +14,7 @@ import com.example.elevate.R;
 
 import timber.log.Timber;
 
-public class SignInFragment extends Fragment implements View.OnClickListener {
+public class MainFragment extends Fragment implements View.OnClickListener {
     private Button mSignInButton;
     private Button mSignUpButton;
 
@@ -28,7 +28,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView() called");
 
-        View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
 
         mSignInButton = v.findViewById(R.id.sign_in_button);
         if (mSignInButton != null) {

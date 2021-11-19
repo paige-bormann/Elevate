@@ -11,8 +11,9 @@
         android:layout_height="41dp"
         android:layout_marginTop="100dp"
         android:text="@string/welcome_returning_user"
-        android:textAlignment="center"
         android:textSize="24sp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/username"
+        android:textColor="#000"
         app:layout_constraintStart_toStartOf="@+id/username_text"
         app:layout_constraintTop_toBottomOf="@+id/skill_level_textview" />
 
@@ -44,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/password"
+        android:textColor="#000"
         app:layout_constraintStart_toStartOf="@+id/username_text"
         app:layout_constraintTop_toBottomOf="@+id/username_text" />
 
