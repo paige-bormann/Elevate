@@ -3,6 +3,7 @@ package com.example.elevate.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -55,7 +56,14 @@ public class QuestionTwoFragment extends Fragment implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView() called");
 
-        View v = inflater.inflate(R.layout.fragment_question_two, container, false);
+        View v;
+        Activity activity = requireActivity();
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            v = inflater.inflate(R.layout.fragment_question_two_land, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_question_two, container, false);
+        }
 
         mRadioGroup = v.findViewById(R.id.answer_two_radiogroup);
         if (mRadioGroup != null) {

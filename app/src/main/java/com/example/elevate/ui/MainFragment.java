@@ -1,7 +1,9 @@
 package com.example.elevate.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,7 +30,14 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView() called");
 
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
+        View v;
+        Activity activity = requireActivity();
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            v = inflater.inflate(R.layout.fragment_main_land, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_main, container, false);
+        }
 
         mSignInButton = v.findViewById(R.id.sign_in_button);
         if (mSignInButton != null) {

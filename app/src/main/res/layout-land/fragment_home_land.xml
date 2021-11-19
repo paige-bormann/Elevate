@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="50dp"
+        android:text="@string/button_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/progress_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/climbing_plan_button" />
+
+    <TextView
+        android:id="@+id/skill_level_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:maxLines="2"
+        android:scrollHorizontally="false"
+        android:text="@string/skill_level"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/goal_skill_level_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:maxLines="2"
+        android:scrollHorizontally="false"
+        android:text="@string/goal_level"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/skill_level_textview" />
+
+    <Button
+        android:id="@+id/survey_button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/button_skills_survey"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal_skill_level_textview" />
+
+    <Button
+        android:id="@+id/climbing_plan_button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/button_climbing_plan"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/settings_button"
+        app:layout_constraintStart_toEndOf="@+id/survey_button"
+        app:layout_constraintTop_toBottomOf="@+id/goal_skill_level_textview" />
+
+    <Button
+        android:id="@+id/near_me_button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/button_near_me"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/survey_button"
+        app:layout_constraintTop_toBottomOf="@+id/survey_button" />
+
+    <Button
+        android:id="@+id/progress_button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/button_progress"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/climbing_plan_button"
+        app:layout_constraintTop_toBottomOf="@+id/climbing_plan_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

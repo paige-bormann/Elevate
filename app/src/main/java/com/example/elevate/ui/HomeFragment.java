@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -67,7 +68,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView() called");
 
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        View v;
+        Activity activity = requireActivity();
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            v = inflater.inflate(R.layout.fragment_home_land, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_home, container, false);
+        }
+
         UserAccount user = mElevateViewModel.getCurrentUser();
 
         mSkillLevelTextView = v.findViewById(R.id.skill_level_textview);

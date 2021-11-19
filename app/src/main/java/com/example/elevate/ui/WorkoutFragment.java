@@ -3,6 +3,7 @@ package com.example.elevate.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,7 +29,6 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
     private ElevateViewModel mElevateViewModel;
     private TextView mWorkoutTextView;
     private TextView mStyleTextView;
-    private TextView mTutorialTextView;
     private TextView mDescriptionTextView;
     private Button mTutorialButton;
     private Button mCompleteWorkoutButton;
@@ -62,7 +62,15 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView() called");
 
-        View v = inflater.inflate(R.layout.fragment_workout, container, false);
+        View v;
+        Activity activity = requireActivity();
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            v = inflater.inflate(R.layout.fragment_workout_land, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_workout, container, false);
+        }
+
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             int id = Integer.parseInt(bundle.get("id").toString());
@@ -70,13 +78,11 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
 
             mWorkoutTextView = v.findViewById(R.id.workout_textview);
             mStyleTextView = v.findViewById(R.id.style_display_textview);
-            //mTutorialTextView = v.findViewById(R.id.tutorial_display_textview);
             mDescriptionTextView=v.findViewById(R.id.Desc_textView);
 
             String grade = "V" + String.valueOf(mWorkout.getGrade());
             mWorkoutTextView.setText(mWorkout.getName() + " (" + grade + ")");
             mStyleTextView.setText(mWorkout.getStyle());
-            //mTutorialTextView.setText(mWorkout.getTutorial());
             mDescriptionTextView.setText(mWorkout.getDescription());
         }
 
