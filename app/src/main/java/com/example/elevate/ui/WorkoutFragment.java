@@ -117,7 +117,7 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
             Fragment fragment = new TutorialFragment();
             fragment.setArguments(bundle);
             fm.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
+                    .replace(R.id.fragment_container, fragment, "TUTORIAL")
                     .addToBackStack(fragment.toString())
                     .commit();
         } else if (viewId == R.id.complete_button) {

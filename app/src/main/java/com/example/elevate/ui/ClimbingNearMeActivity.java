@@ -1,15 +1,19 @@
 package com.example.elevate.ui;
 
 import android.Manifest;
-import android.app.Dialog;
+import android.content.Context;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.GnssStatus;
 import android.location.Location;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,11 +26,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.Status;
+import com.example.elevate.MapBroadcastReceiver;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,17 +39,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import rebus.permissionutils.PermissionUtils;
 import timber.log.Timber;
 
 /**
@@ -67,7 +62,24 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private EditText mSearchEditText;
     private ImageView mGPS;
+    MapBroadcastReceiver mMapBroadcastReceiver = new MapBroadcastReceiver(this);
+    private LatLng mDefaultLocation = new LatLng(0.0, 0.0);
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(LocationManager.PROVIDERS_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(mMapBroadcastReceiver, filter);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        unregisterReceiver(mMapBroadcastReceiver);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
@@ -76,7 +88,9 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
         mSearchEditText = (EditText)  findViewById(R.id.search_edittext);
         mGPS = (ImageView) findViewById(R.id.ic_gps);
 
-        getLocationPermission();
+        if (hasGPSSignal()) {
+            getLocationPermission();
+        }
     }
 
     private void init() {
@@ -104,19 +118,21 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
     }
 
     private void geoLocate() {
-        String search = mSearchEditText.getText().toString();
-        Geocoder geocoder = new Geocoder(ClimbingNearMeActivity.this);
-        List<Address> list = new ArrayList<>();
-        try {
-            list = geocoder.getFromLocationName(search, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if (hasGPSSignal()) {
+            String search = mSearchEditText.getText().toString();
+            Geocoder geocoder = new Geocoder(ClimbingNearMeActivity.this);
+            List<Address> list = new ArrayList<>();
+            try {
+                list = geocoder.getFromLocationName(search, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        if (list.size() > 0) {
-            Address address = list.get(0);
-            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
-                    address.getAddressLine(0));
+            if (list.size() > 0) {
+                Address address = list.get(0);
+                moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
+                        address.getAddressLine(0));
+            }
         }
     }
 
@@ -167,7 +183,7 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
     private void getDeviceLocation() {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try {
-            if (mLocationPermissionGranted) {
+            if (mLocationPermissionGranted && hasGPSSignal()) {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
@@ -177,15 +193,22 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
                             Location currentLocation = (Location) task.getResult();
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM, "My Location");
 
-                            String url = getUrl(currentLocation.getLatitude(), currentLocation.getLongitude(), "gym");
-                            Object[] DataTransfer = new Object[2];
-                            DataTransfer[0] = mGoogleMap;
-                            DataTransfer[1] = url;
-                            GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                            getNearbyPlacesData.execute(DataTransfer);
+                            if (currentLocation != null) {
+                                moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+                                        DEFAULT_ZOOM, "My Location");
+                            } else {
+                                moveCamera(mDefaultLocation, DEFAULT_ZOOM, "My Location");
+                            }
+
+                            if (isConnectedToInternet()) {
+                                String url = getUrl(currentLocation.getLatitude(), currentLocation.getLongitude(), "gym");
+                                Object[] DataTransfer = new Object[2];
+                                DataTransfer[0] = mGoogleMap;
+                                DataTransfer[1] = url;
+                                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                                getNearbyPlacesData.execute(DataTransfer);
+                            }
 
                         } else {
                             Toast.makeText(ClimbingNearMeActivity.this, "Unable to get current location.", Toast.LENGTH_SHORT).show();
@@ -236,5 +259,41 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
                     .title(title);
             mGoogleMap.addMarker(options);
         }
+    }
+
+    public void updateView() {
+        boolean signal = hasGPSSignal();
+        if (signal) {
+            if (mGoogleMap != null) {
+                getDeviceLocation();
+            } else {
+                getLocationPermission();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "No GPS signal.", Toast.LENGTH_SHORT).show();
+            if (mGoogleMap != null) {
+                moveCamera(mDefaultLocation, 1, "My Location");
+            }
+        }
+    }
+
+    public boolean isConnectedToInternet() {
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        return isConnected;
+    }
+
+    public boolean hasGPSSignal() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean hasGPS = true;
+        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            hasGPS = false;
+        }
+
+        return hasGPS;
     }
 }

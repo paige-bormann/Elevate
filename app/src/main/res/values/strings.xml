@@ -59,6 +59,7 @@
     <string name="climbing_plan_hint_need_skill">Complete the Skill Level Survey to view suggested workouts for your skill level.</string>
     <string name="climbing_plan_hint_all_done">You\'ve completed all of the recommended workouts! Update your skill level in the Skill Level Survey to see more workouts.</string>
     <string name="progress_hint">You haven\'t completed any workouts yet.</string>
+    <string name="internet_hint">No internet connection.</string>
 
     <!-- Dialog Text -->
     <string name="error">Error</string>

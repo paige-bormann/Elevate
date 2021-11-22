@@ -1,6 +1,7 @@
 package com.example.elevate.ui;
 
-import android.app.Activity;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,20 +9,17 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.webkit.WebViewFragment;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.example.elevate.TutorialBroadcastReceiver;
 import com.example.elevate.R;
 import com.example.elevate.model.ElevateViewModel;
 import com.example.elevate.model.Workout;
@@ -32,6 +30,22 @@ public class TutorialFragment extends Fragment {
     private WebView mWebView;
     private ElevateViewModel mElevateViewModel;
     private Workout mWorkout;
+    private TextView mInternetHint;
+
+    TutorialBroadcastReceiver mTutorialBroadcastReceiver = new TutorialBroadcastReceiver(this);
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        getActivity().registerReceiver(mTutorialBroadcastReceiver, filter);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().unregisterReceiver(mTutorialBroadcastReceiver);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +76,9 @@ public class TutorialFragment extends Fragment {
         Timber.d("onCreateView() called");
 
         View v = inflater.inflate(R.layout.fragment_tutorial, container, false);
+        mInternetHint = v.findViewById(R.id.internet_textview);
+        mInternetHint.setVisibility(View.INVISIBLE);
+
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             int id = Integer.parseInt(bundle.get("id").toString());
@@ -76,12 +93,21 @@ public class TutorialFragment extends Fragment {
             });
             WebSettings webSettings = mWebView.getSettings();
             webSettings.setJavaScriptEnabled(true);
-            // default video now for testing, change to get workout tutorial once in database
-            //mWebView.loadUrl("https://www.youtube.com/watch?v=gLfvk2SSj1c");
             mWebView.loadUrl(mWorkout.getTutorial());
         }
 
         return v;
     }
 
+    public void updateView(boolean connection) {
+        if (connection) {
+            mInternetHint.setVisibility(View.INVISIBLE);
+            mWebView.setVisibility(View.VISIBLE);
+            mWebView.loadUrl(mWorkout.getTutorial());
+        } else {
+            mInternetHint.setVisibility(View.VISIBLE);
+            mWebView.setVisibility(View.INVISIBLE);
+        }
+    }
 }
+
