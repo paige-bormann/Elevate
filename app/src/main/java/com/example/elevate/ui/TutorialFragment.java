@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -32,7 +33,8 @@ public class TutorialFragment extends Fragment {
     private Workout mWorkout;
     private TextView mInternetHint;
 
-    TutorialBroadcastReceiver mTutorialBroadcastReceiver = new TutorialBroadcastReceiver(this);
+    TutorialActivity temp = new TutorialActivity();
+    TutorialBroadcastReceiver mTutorialBroadcastReceiver = new TutorialBroadcastReceiver(temp);
 
     @Override
     public void onStart() {
@@ -93,7 +95,14 @@ public class TutorialFragment extends Fragment {
             });
             WebSettings webSettings = mWebView.getSettings();
             webSettings.setJavaScriptEnabled(true);
+            //webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+            //webSettings.setDomStorageEnabled(true);
+            //mWebView.setWebChromeClient(new WebChromeClient());
+            //mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
             mWebView.loadUrl(mWorkout.getTutorial());
+            //mWebView.pauseTimers();
+            //mWebView.resumeTimers();
         }
 
         return v;

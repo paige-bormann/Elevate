@@ -1,6 +1,7 @@
 package com.example.elevate.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -109,7 +110,11 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
         //FragmentActivity activity = requireActivity();
 
         if (viewId == R.id.tutorial_button) {
-            // Open tutorial fragment
+            Intent intent = new Intent(getActivity(), TutorialActivity.class);
+            intent.putExtra("tutorial", mWorkout.getTutorial());
+            startActivity(intent);
+
+/*            // Open tutorial fragment
             Bundle bundle = new Bundle();
             bundle.putString("id", String.valueOf(mWorkout.getWorkoutId()));
 
@@ -117,9 +122,9 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
             Fragment fragment = new TutorialFragment();
             fragment.setArguments(bundle);
             fm.beginTransaction()
-                    .replace(R.id.fragment_container, fragment, "TUTORIAL")
+                    .replace(R.id.fragment_container, fragment)
                     .addToBackStack(fragment.toString())
-                    .commit();
+                    .commit();*/
         } else if (viewId == R.id.complete_button) {
             // toggle workout complete
             if (mWorkout.getCompleted()) {

@@ -246,7 +246,7 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
         googlePlacesUrl.append("&type=" + nearbyPlace);
         googlePlacesUrl.append("&sensor=true");
         //TODO Replace with your API KEY (MUST ENABLE BILLING)
-        googlePlacesUrl.append("&key=" + "");
+        googlePlacesUrl.append("&key=" + "AIzaSyAwuCiTP5FO-X72Uso9KcC-yepBp3-tt9g");
 
         return (googlePlacesUrl.toString());
     }
