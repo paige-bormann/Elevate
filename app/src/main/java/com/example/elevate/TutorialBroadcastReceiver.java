@@ -7,10 +7,10 @@ import android.net.ConnectivityManager;
 import android.widget.Toast;
 
 import com.example.elevate.ui.TutorialActivity;
-import com.example.elevate.ui.TutorialFragment;
 
 public class TutorialBroadcastReceiver extends BroadcastReceiver {
     private TutorialActivity mTutorialActivity;
+    private boolean previousConnection = true;
 
     public TutorialBroadcastReceiver(TutorialActivity activity) {
         mTutorialActivity = activity;
@@ -22,9 +22,10 @@ public class TutorialBroadcastReceiver extends BroadcastReceiver {
             boolean noConnectivity = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
             if (noConnectivity) {
                 Toast.makeText(context, "No internet connection.", Toast.LENGTH_SHORT).show();
-                mTutorialActivity.updateView(false);
-            } else {
-                mTutorialActivity.updateView(true);
+                previousConnection = false;
+            } else if (!previousConnection) {
+                Toast.makeText(context, "Re-established internet connection.", Toast.LENGTH_SHORT).show();
+                previousConnection = true;
             }
         }
     }

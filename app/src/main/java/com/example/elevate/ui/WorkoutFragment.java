@@ -107,7 +107,6 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         Activity activity = requireActivity();
         final int viewId = view.getId();
-        //FragmentActivity activity = requireActivity();
 
         if (viewId == R.id.tutorial_button) {
             Intent intent = new Intent(getActivity(), TutorialActivity.class);
