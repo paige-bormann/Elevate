@@ -93,10 +93,18 @@ public class ClimbingPlanFragment extends Fragment implements WorkoutAdapter.OnW
 
                 if (mElevateViewModel.getCurrentUser().mCLevel == 0 && mWorkouts.size() == 0) {
                     mHint.setVisibility(View.VISIBLE);
-                    mHint.setText(getResources().getString(R.string.climbing_plan_hint_need_skill));
+                    if (isAdded()) {
+                        mHint.setText(getResources().getString(R.string.climbing_plan_hint_need_skill));
+                    } else {
+                        mHint.setText("Complete the Skill Level Survey to view suggested workouts for your skill level.");
+                    }
                 } else if (mElevateViewModel.getCurrentUser().mCLevel != 0 && mWorkouts.size() == 0) {
                     mHint.setVisibility(View.VISIBLE);
-                    mHint.setText(getResources().getString(R.string.climbing_plan_hint_all_done));
+                    if (isAdded()) {
+                        mHint.setText(getResources().getString(R.string.climbing_plan_hint_all_done));
+                    } else {
+                        mHint.setText("You've completed all of the recommended workouts! Update your skill level in the Skill Level Survey to see more workouts.");
+                    }
                 } else {
                     mHint.setVisibility(View.INVISIBLE);
                 }

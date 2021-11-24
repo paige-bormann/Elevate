@@ -8,13 +8,13 @@
 
     <Button
         android:id="@+id/settings_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="50dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
         android:text="@string/button_settings"
-        app:layout_constraintBottom_toBottomOf="@+id/progress_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/climbing_plan_button" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/near_me_button" />
 
     <TextView
         android:id="@+id/skill_level_textview"
@@ -55,8 +55,8 @@
 
     <Button
         android:id="@+id/survey_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:text="@string/button_skills_survey"
@@ -66,19 +66,19 @@
 
     <Button
         android:id="@+id/climbing_plan_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
         android:text="@string/button_climbing_plan"
         android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/settings_button"
-        app:layout_constraintStart_toEndOf="@+id/survey_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goal_skill_level_textview" />
 
     <Button
         android:id="@+id/near_me_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:text="@string/button_near_me"
         android:textAlignment="center"
@@ -87,8 +87,8 @@
 
     <Button
         android:id="@+id/progress_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:text="@string/button_progress"
         android:textAlignment="center"

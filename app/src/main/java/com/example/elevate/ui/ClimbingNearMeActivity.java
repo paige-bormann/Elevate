@@ -1,6 +1,7 @@
 package com.example.elevate.ui;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -201,7 +202,7 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
                                 moveCamera(mDefaultLocation, DEFAULT_ZOOM, "My Location");
                             }
 
-                            if (isConnectedToInternet()) {
+                            if (isConnectedToInternet() && hasGPSSignal()) {
                                 String url = getUrl(currentLocation.getLatitude(), currentLocation.getLongitude(), "gym");
                                 Object[] DataTransfer = new Object[2];
                                 DataTransfer[0] = mGoogleMap;
@@ -223,6 +224,7 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
 
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap){
         mGoogleMap = googleMap;
