@@ -40,6 +40,15 @@ public class ElevateViewModel  extends AndroidViewModel {
         return accountInList;
     }
 
+    public boolean usernameAlreadyExists(String username) {
+        boolean exists = false;
+        UserAccount user = mRepository.findUserAccountByUsername(username);
+        if (user != null) {
+            exists = true;
+        }
+        return exists;
+    }
+
     public UserAccount getCurrentUser() {
         return mCurrentUser;
     }

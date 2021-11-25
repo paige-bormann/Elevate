@@ -33,5 +33,8 @@ public interface UserAccountDao {
 
     @Query("SELECT rowid, name, password, currentLevel, goalLevel FROM useraccount WHERE name LIKE :name AND password LIKE :password LIMIT 1")
     public UserAccount findByName(String name, String password);
+
+    @Query("SELECT rowid, name, password, currentLevel, goalLevel FROM useraccount WHERE name LIKE :username LIMIT 1")
+    public UserAccount findByUsername(String username);
 }
 

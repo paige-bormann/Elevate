@@ -27,6 +27,10 @@ public class ElevateRepository {
         return mUserAccountDao.findByName(userAccount.getName(), userAccount.getPassword());
     }
 
+    UserAccount findUserAccountByUsername(String username) {
+        return mUserAccountDao.findByUsername(username);
+    }
+
     //UserAccount database methods
     public void insert(UserAccount userAccount){
         ElevateRoomDatabase.databaseWriteExecutor.execute(() ->{

@@ -95,10 +95,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 String sha256HashStr = StringUtils.bytesToHex(sha256HashBytes);
 
                 UserAccount userAccount = new UserAccount(username, sha256HashStr);
-                // Create new UserAccount, add it to ViewModel
-                mElevateViewModel.insert(userAccount);
-                Toast.makeText(activity.getApplicationContext(), "New UserAccount added", Toast.LENGTH_SHORT).show();
-
+                boolean userExists = mElevateViewModel.usernameAlreadyExists(username);
+                if (userExists) {
+                    Toast.makeText(activity, "Username already in use.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Create new UserAccount, add it to ViewModel
+                    mElevateViewModel.insert(userAccount);
+                    Toast.makeText(activity.getApplicationContext(), "New UserAccount added", Toast.LENGTH_SHORT).show();
+                }
             } catch (NoSuchAlgorithmException e) {
                 Toast.makeText(activity, "Error: No SHA-256 algorithm found", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
