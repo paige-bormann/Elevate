@@ -188,7 +188,7 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
-                Task location = mFusedLocationProviderClient.getLastLocation();
+                @SuppressLint("MissingPermission") Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
@@ -224,7 +224,8 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
 
     }
 
-    @SuppressLint("MissingPermission")
+
+    //@SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap){
         mGoogleMap = googleMap;
@@ -235,6 +236,7 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
                 != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
+
             mGoogleMap.setMyLocationEnabled(true);
             mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
             init();
@@ -282,6 +284,7 @@ public class ClimbingNearMeActivity extends AppCompatActivity implements OnMapRe
     public boolean isConnectedToInternet() {
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
